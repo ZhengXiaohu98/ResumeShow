@@ -1,0 +1,201 @@
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+
+#backGround {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
+.authContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); */
+    object-fit: contain;
+
+}
+
+
+.authform {
+    /* a rgba value for the background color - white with a 90% transparency. */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 25px;
+}
+
+
+.infoForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 35%;
+    min-width: 250px;
+    max-width: 350px;
+    /* min-height: 300px; */
+}
+
+.authTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.authDesc {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    width: 200px;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+
+.infoInputWraper {
+    height: 2.3rem;
+    width: 85%;
+    min-width: 240px;
+
+    border: 1px solid silver;
+    border-radius: 8px;
+    border-width: 1px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+
+/* doesnt work */
+.infoInputWraper:focus {
+    border-color: black;
+}
+
+.infoInput {
+    width: 90%;
+    height: 90%;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.9) inset !important;
+}
+
+.trouble{
+    margin-bottom: 1rem;
+    width: 85%;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    text-decoration: none;
+    color: black;
+
+}
+
+.trouble:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: black;
+}
+
+.button{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 10px;
+
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.button:hover{
+    border: 1px solid white;
+    background-color: black;
+    color: white;
+}
+
+.infoButton{
+    width: 90%;
+    background-color: #fccc84;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;;
+}
+
+.hr-mid-circle{
+    width: 90%;
+    border: 0;
+    color: #d0d0d5;
+    background: linear-gradient(currentColor, currentColor) no-repeat center;
+    background-size: 100% 1px;
+}
+.hr-mid-circle::before {
+    content: '';
+    display: block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background-color: currentColor;
+    margin: auto;
+}
+
+.signOptions{
+    margin-top:1rem;
+    width: 85%;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+}
+
+.buttonWrapper{
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+}
+
+.logoWrapper{
+    border: 1px solid black;
+    border-radius: 8px;
+    border-width: 1px;
+
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    align-self: center;
+    min-width: 20px;
+    min-height: 40px;
+}
+.logoIcon{
+
+    width: 35%;
+    height: 40%;
+    padding-left: 7px;
+    padding-right: 3px;
+
+    align-self: center;
+}
+.logoBtn{
+    border: 1px solid transparent;;
+}
+.logoBtn:hover{
+    border: 1px solid black;
+}
+
