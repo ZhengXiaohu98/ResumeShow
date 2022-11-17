@@ -191,5 +191,6 @@ input:-webkit-autofill:active {
 }
 .logoBtn:hover{
     border: 1px solid black;
+    transition: all 0.5s ease;
 }
 

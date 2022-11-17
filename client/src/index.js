@@ -9,9 +9,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
         <UserProvider>
-
-        <App />
+            <App />
         </UserProvider>
 
-    </BrowserRouter>);
+    </BrowserRouter>
+);
 

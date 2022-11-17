@@ -11,6 +11,7 @@ dotenv.config();
 import * as passportSetup from "./passport.js";
 import * as passportLocalSetup from "./passportLocal.js";
 import AuthRoute from "./Routers/AuthRoute.js"
+import PostRoute from "./Routers/PostRoute.js"
 
 //============================================================================================
 
@@ -33,8 +34,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use(bodyParser.json({ extended: true }))
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json({limit: '50mb', extended: true }))
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true }))
 
 app.use(
 	cors({
@@ -61,7 +62,7 @@ mongoose
 //usage of routes:
 app.use('/auth', AuthRoute)
 // app.use('/user', UserRoute)
-// app.use('/posts', PostRoute)
+app.use('/posts', PostRoute)
 // app.use('/upload', UploadRoute)
 
 

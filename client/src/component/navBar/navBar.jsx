@@ -25,7 +25,7 @@ const NavBar = () => {
     <>
       <nav className="navbar">
         <span className="navbar-logo">
-          <Link className="nav-links" to="/">
+          <Link className="nav-links" to="/" onClick={closeMobileMenu}>
             ResumeShow
           </Link>
         </span>

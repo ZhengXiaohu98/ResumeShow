@@ -7,14 +7,18 @@ import mongoose from "mongoose";
             type: String,
             required: true
         },
+
+        title: String,
+
         description: String,
 
-        resume: String,
+        file: String,
 
         resumeBlocks: [],
 
         likes:[],
 
+        //list of comments id
         comments: []
 
     },

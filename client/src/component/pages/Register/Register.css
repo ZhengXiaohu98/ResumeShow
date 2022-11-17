@@ -132,6 +132,7 @@ input:-webkit-autofill:active {
     border: 1px solid white;
     background-color: black;
     color: white;
+    transition: all 0.5s ease;
 }
 
 .infoButton{
@@ -197,5 +198,7 @@ input:-webkit-autofill:active {
 }
 .logoBtn:hover{
     border: 1px solid black;
+    transition: all 0.5s ease;
+
 }
 
