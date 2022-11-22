@@ -1,67 +1,112 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as FacebookStrategy } from "passport-facebook";
 import passport from "passport";
 import userModel from './Models/userModel.js'
 import dotenv from 'dotenv';
 dotenv.config();
 
 passport.use(
-    new GoogleStrategy(
-        {
-            clientID: process.env.CLIENT_ID,
-            clientSecret: process.env.CLIENT_SECRET,
-            callbackURL: "/auth/google/callback",
-            scope: ["profile", "email"],
-        },
+  new GoogleStrategy(
+    {
+      clientID: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+      callbackURL: "/auth/google/callback",
+      scope: ["profile", "email"],
+    },
 
-        //define callback function
-        function (accessToken, refreshToken, profile, done) {
-            userModel.findOne({
-                providerUserId: profile.id
-            }, function (err, user) {
-                if (err) {
-                    return done(err);
-                }
-                
-                //No user was found... so create a new user with values from google profile
-                if (!user) {
-                    //build username
-                    const mailAddr = profile.emails[0].value
-                    const index = mailAddr.indexOf("@")
-                    const newName = mailAddr.substring(0, index);
-
-                    user = new userModel({
-                        username: newName,
-                        Email: profile.emails[0].value,
-                        password: "123asd...",  //notice that password didnt use salt! cannot just use "123asd..." when normal login. LOL
-                        name: profile.displayName,
-                        provider: 'google',
-                        providerUserId: profile.id,
-                        providerProfile: profile._json
-                    });
-                    user.save(function (err) {
-                        if (err) console.log(err);
-                        return done(err, user);
-                    });
-                }
-
-                //found user. Return
-                else {
-                    return done(err, user);
-                }
-            });
+    //define callback function
+    function (accessToken, refreshToken, profile, done) {
+      userModel.findOne({
+        providerUserId: profile.id
+      }, function (err, user) {
+        if (err) {
+          return done(err);
         }
-        //callback(null, profile); //return profile details
-    )
+
+        //No user was found... so create a new user with values from google profile
+        if (!user) {
+          //build username
+          const mailAddr = profile.emails[0].value
+          const index = mailAddr.indexOf("@")
+          const newName = mailAddr.substring(0, index);
+
+          user = new userModel({
+            username: newName,
+            Email: profile.emails[0].value,
+            password: "unknown",
+            name: profile.displayName,
+            provider: 'google',
+            providerUserId: profile.id,
+            providerProfile: profile._json
+          });
+          user.save(function (err) {
+            if (err) console.log(err);
+            return done(err, user);
+          });
+        }
+
+        //found user. Return
+        else {
+          return done(err, user);
+        }
+      });
+    }
+    //callback(null, profile); //return profile details
+  )
+)
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FB_CLIENT_ID,
+      clientSecret: process.env.FB_CLIENT_SECRET,
+      callbackURL: "/auth/facebook/callback",
+      scope: ["profile", "email"],
+    },
+    function(accessToken, refreshToken, profile, done) {
+      userModel.findOne({
+        providerUserId: profile.id
+      }, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          //build username
+          const mailAddr = profile.emails[0].value
+          const index = mailAddr.indexOf("@")
+          const newName = mailAddr.substring(0, index);
+
+          user = new userModel({
+            username: newName,
+            Email: profile.emails[0].value,
+            password: "unknown",  
+            name: profile.displayName,
+            provider: 'facebook',
+            providerUserId: profile.id,
+            providerProfile: profile._json
+          });
+          user.save(function (err) {
+            if (err) console.log(err);
+            return done(err, user);
+          });
+        }
+        //found user. Return
+        else {
+          return done(err, user);
+        }
+      });
+    }
+  )
 )
 
 
 //due to using cookie session, need to serialize user
 passport.serializeUser((user, done) => {
-    done(null, user)
+  done(null, user)
 })
 
 passport.deserializeUser((user, done) => {
-    done(null, user)
+  done(null, user)
 })
 
 

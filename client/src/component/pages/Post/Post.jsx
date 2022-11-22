@@ -8,6 +8,10 @@ import clockImg from "./001-clock.png"
 import commentImg from "./comment.png"
 import deleteImg from './delete.png'
 
+import { notification } from 'antd';
+import { SmileTwoTone } from '@ant-design/icons';
+
+
 const Post = () => {
 
     const user = useContext(UserProvider.context);
@@ -42,16 +46,27 @@ const Post = () => {
 
     const [items, setItems] = useState([])
 
+    // use for notification
+    const [api, contextHolder] = notification.useNotification();
+
+
     const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         try {
             const result = await PostAPI.createPost(postData)
-            console.log("Submitted the post.")
             setPost(initPost);
             setTemp(initPost);
             const { newPost } = result.data
             setItems([...items, newPost]);
+
+            api.open({
+              message: `Successfully Uploaded resume`,
+              description: 'Thank you for uploading you resume. Your resume will not be used for any commercial purposes!',
+              icon: <SmileTwoTone style={{ color: '#108ee9' }}/>,
+              placement: "top"
+            });
+
         } catch (error) {
             console.log(error)
         }
@@ -81,8 +96,9 @@ const Post = () => {
 
 
     return (
+        
         <div className="PostBigcontainer">
-
+            {contextHolder}
             <div className="PostContainer">
 
                 <div className="postWrapper">
@@ -131,7 +147,7 @@ const Post = () => {
 
                             {item.file ?
                                 (<div className="cardImgContainer">
-                                    <img className="cardImage" src={item.file} />
+                                    <embed className="cardImage" src={item.file} />
                                 </div>)
                                 :
                                 <div style={{ marginTop: "15px" }} />}

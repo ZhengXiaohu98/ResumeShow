@@ -12,8 +12,6 @@ const UserProvider = ({ children }) => {
     try {
       const url = `${process.env.REACT_APP_API_URL}/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
-      // console.log(data)
-      // console.log(data.user)
       setUser(data.user);
     } catch (err) {
       console.log(err);

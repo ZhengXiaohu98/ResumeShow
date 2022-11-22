@@ -7,10 +7,13 @@ import * as passportLocalSetup from "../passportLocal.js";
 const router = express();
 
 
-//google login:
+//google login
 router.get("/google/callback", AuthController.googleCallback());
 router.get("/google", passport.authenticate("google", ["profile", "email"]));
 
+//facebook login
+router.get("/facebook/callback", AuthController.facebookCallback());
+router.get("/facebook", passport.authenticate("facebook", ["profile", "email"]));
 
 //regular sign up and login:
 router.post('/register', AuthController.checkAlreadyRegistered, AuthController.registerUser, passport.authenticate("local"), AuthController.login)
