@@ -131,7 +131,8 @@ const Post = () => {
 
                             {item.file ?
                                 (<div className="cardImgContainer">
-                                    <img className="cardImage" src={item.file} />
+                                     <embed className="cardImage" src={item.file} />
+                                    {/* <img className="cardImage" src={item.file} /> */}
                                 </div>)
                                 :
                                 <div style={{ marginTop: "15px" }} />}
