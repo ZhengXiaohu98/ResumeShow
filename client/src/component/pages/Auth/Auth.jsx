@@ -25,12 +25,26 @@ const Auth = () => {
     }
   };
 
+  const facebookAuth = () => {
+    try {
+      window.open(
+        `${process.env.REACT_APP_API_URL}/auth/facebook/callback`,
+        "_self"
+      );
+    } catch (error) {
+      console.log("Auth page, open oauth...  \n" + error)
+    }
+  };
+
   const initData = {
     username: "",
     password: "",
   }
 
   const [data, setData] = useState(initData);
+
+  // check if the user's username or passward is an invalid input
+  const [badInfo, setBadInfo] = useState(false);
 
   const changeData = (e) => {
     setData(
@@ -39,7 +53,7 @@ const Auth = () => {
   }
 
 
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -48,14 +62,10 @@ const Auth = () => {
     try {
       //if result is undefined, invalid password or username
       var loginResult = response.request
-      if (typeof loginResult === 'undefined')
-        console.log("Invalid Username or Wrong Password.")
-        //For future updates:  use a react state to show 
-        // the login info 
-
-
-      //check if status is 200, if so, go to home page
-      else {
+      if (typeof loginResult === 'undefined') {
+        // bad username or passward
+        setBadInfo(true)
+      } else { //check if status is 200, if so, go to home page
         loginResult = response.request.status
         if (loginResult == "200") {
           // this.setState({ user: response.data })
@@ -73,12 +83,16 @@ const Auth = () => {
     <div className="auth">
 
       <div className="authContainer">
-        <img id='backGround' src={background} alt="" />        
+        <img id='backGround' src={background} alt="" />
 
         {/* <div className="signIn"> */}
         <form className="infoForm authform">
           <span className='authTitle'>User Login</span>
-          <span className='authDesc'>Enter your data to get sign in to your account</span>
+          
+          {badInfo?
+            <span className='authDesc failAuth'>Invalid Username or Wrong Password</span> :
+            <span className='authDesc'>Enter your data to get sign in to your account</span>
+          }
 
           <div className='infoInputWraper'>
             <input required
@@ -129,7 +143,7 @@ const Auth = () => {
 
             <div className="logoWrapper">
               <img src={facebook} alt='' class="logoIcon" />
-              <button className='button logoBtn'>
+              <button className='button logoBtn' onClick={facebookAuth}>
                 Facebook
               </button>
             </div>

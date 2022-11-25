@@ -14,9 +14,21 @@ import mongoose from "mongoose";
 
         file: String,
 
+        isLookForJobs: {
+          type: Boolean,
+          default: false
+        },
+
+        major: {
+          type: String,
+          default: "None"
+        },
+
         resumeBlocks: [],
 
         likes:[],
+
+        stars:[],
 
         //list of comments id
         comments: []

@@ -1,0 +1,7 @@
+.cardIcon:hover{
+  scale: 125%;
+}
+
+.cardImage{
+  border-radius: 5px;
+}

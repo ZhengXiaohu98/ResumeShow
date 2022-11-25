@@ -10,6 +10,10 @@ const CommentSchema = mongoose.Schema(
 
         desc: String,
 
+        postId:{
+            type: String,
+            required: true
+        }
         // to the post id
         //commentTo: string
     }

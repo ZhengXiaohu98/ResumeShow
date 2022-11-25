@@ -16,6 +16,19 @@ export const googleCallback = () => {
     }
 }
 
+//Facebook login
+export const facebookCallback = () => {
+  try {
+      return (passport.authenticate("facebook", {
+          successRedirect: process.env.CLIENT_URL,
+          failureRedirect: "/login/failed",
+      }));
+  } catch (error) {
+      console.log("Error in AuthController/facebookCallback")
+      console.log(error)
+  }
+}
+
 
 
 

@@ -9,9 +9,6 @@ export const createPost = async (postData) => {
         const { data } = await API.post("/posts", postData).then(
             (res)=> returnData = res
         )
-        // console.log("create post:")
-        // console.log({data})
-        // return {data}
 
     } catch (error) {
         console.log(error)
@@ -23,12 +20,9 @@ export const createPost = async (postData) => {
 
 
 export const getPost = async (id) => {
-
-    var returnData = {};
     try {
         const { data } = API.get("/posts/post" + id, { withCredentials: true })
         return data;
-
     } catch (error) {
         console.log(error)
     }
@@ -49,11 +43,7 @@ export const getAllPost = async () => {
         console.log("get all catch error:")
         console.log(error)
     }
-
-    // console.log("get all return data:")
-    // console.log(returnData)
     return (returnData)
-
 }
 
 
@@ -64,15 +54,40 @@ export const getAllMyPosts = async (id) => {
         await API.get("/posts/myposts/"+id).then((res) => {
             returnData = res
         })
-        console.log("Request all posts SUCCESS.")
-
     } catch (error) {
         console.log("get all catch error:")
         console.log(error)
     }
-
-    // console.log("get all return data:")
-    // console.log(returnData)
     return (returnData)
 
+}
+
+
+// api update resume(like)
+export const updateResumeLike = async (resumeId, userId, likeList) => {
+  try {
+    if(likeList.includes(userId)) {
+      return API.get("/posts/dislike/"+resumeId+"?userId="+userId, { withCredentials: true })
+    }
+    return API.get("/posts/like/"+resumeId+"?userId="+userId, { withCredentials: true })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+// api update resume(comment)
+export const updateResumeComment = async (resumeId, userId, content) => {
+  return API.get("/posts/addcomment/"+resumeId+"?userId="+userId+"&content="+content, { withCredentials: true })
+}
+
+// api update resume(stars)
+export const updateResumeStar = async (resumeId, userId, starList) => {
+  try {
+    if(starList.includes(userId)) {
+      return API.get("/posts/unstar/"+resumeId+"?userId="+userId, { withCredentials: true })
+    }
+    return API.get("/posts/star/"+resumeId+"?userId="+userId, { withCredentials: true })
+  } catch (err) {
+    console.log(err)
+  }
 }

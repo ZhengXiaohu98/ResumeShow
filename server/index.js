@@ -10,8 +10,12 @@ import cookieSession from "cookie-session";
 dotenv.config();
 import * as passportSetup from "./passport.js";
 import * as passportLocalSetup from "./passportLocal.js";
+
+// routes
 import AuthRoute from "./Routers/AuthRoute.js"
 import PostRoute from "./Routers/PostRoute.js"
+import UserRoute from "./Routers/UserRoute.js"
+import GetResumeRoute from "./Routers/GetResumeRoute.js"
 
 //============================================================================================
 
@@ -39,7 +43,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true }))
 
 app.use(
 	cors({
-		// origin: "http://localhost:3000",
+		//origin: "http://localhost:3000",
 		methods: "GET,POST,PUT,DELETE",
 		origin: true,
 		credentials: true,
@@ -61,8 +65,7 @@ mongoose
 
 //usage of routes:
 app.use('/auth', AuthRoute)
-// app.use('/user', UserRoute)
+app.use('/getresume', GetResumeRoute)
+app.use('/user', UserRoute)
 app.use('/posts', PostRoute)
-// app.use('/upload', UploadRoute)
-
 
