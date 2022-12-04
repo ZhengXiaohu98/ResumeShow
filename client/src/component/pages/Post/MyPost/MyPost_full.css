@@ -1,0 +1,486 @@
+@media screen and (min-width: 1250px) {
+
+
+    .PostBigcontainer {
+        /* background-image: linear-gradient(to right, #DECBA4, #3E5151); */
+        background-color: #E8ECF4;
+
+        height: 100%;
+        width: 100%;
+
+        /* margin: 0px;
+        padding: 0px;
+        overflow-x: hidden; */
+
+        /* display: flex;
+        flex-direction: column;
+    
+        align-items: center;
+        justify-content: center; */
+    }
+
+    .PostContainer {
+
+        height: 135vh;
+        width: 85%;
+        margin-left: 150px;
+
+        padding: 1rem;
+        background-color: white;
+
+        /* #ECECF4 */
+        border-radius: 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+
+        display: flex;
+        flex-direction: row-reverse;
+        /* align-items: flex-start; */
+        justify-content: center;
+        /* justify-content: space-between; */
+        gap: 2rem;
+
+        box-shadow: 3px 3px 10px rgb(0 0 0 / 0.2);
+    }
+
+
+
+    /*  for the post form*/
+
+    .postWrapper {
+
+
+        width: 50%;
+        max-width: 550px;
+        height: 135vh;
+
+        /* width: 20%;
+        min-width: 300px; */
+        background-color: white;
+
+        border-radius: 5px;
+
+        margin-bottom: 15px;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+
+
+
+    /* for <pre> */
+    .postData {
+        width: 82%;
+        padding: 1rem;
+        margin: 20px 10px;
+        border: 1px solid gainsboro;
+        border-radius: 20px;
+        background-color: gainsboro;
+
+    }
+    .postPicWrapper {
+        /* max-width: 400px; */
+        max-width: 88%;
+        max-height: 170px;
+
+        /* margin-top: 5px; */
+        margin-bottom: 10px;
+
+        overflow: hidden;
+        align-self:center;
+
+        border: 1px solid gray;
+        border-radius: 20px;
+    }
+
+    .postPic {
+        width: 100%;
+    }
+    /* .postPic{
+        width: 90%;
+        height: 250px;
+        border: 0px solid gainsboro;
+        border-radius: 20px;
+    } */
+
+
+    .postForm {
+
+        /* a rgba value for the background color - white with a 90% transparency. */
+        /* background: rgba(255, 255, 255, 0.5); */
+        margin-bottom: 10px;
+        margin-top: 20px;
+
+
+
+        width: 90%;
+
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+
+    .postTitleWraper {
+        height: 2.1rem;
+        width: 100%;
+
+        border: 1px solid silver;
+        border-radius: 8px;
+        border-width: 1px;
+
+        display: flex;
+        flex-direction: row;
+        gap: 7px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .postTitle {
+        width: 90%;
+        height: 90%;
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+        border: none;
+        outline: none;
+        border-right: 1px solid silver;
+    }
+
+
+    .postDescWraper {
+        height: 8rem;
+        width: 100%;
+
+        border: 1px solid silver;
+        border-radius: 8px;
+        border-width: 1px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .postDesc {
+        width: 96%;
+        height: 90%;
+        font-size: 18px;
+        font-family: 'Poppins', sans-serif;
+        border: none;
+        outline: none;
+        resize: none;
+    }
+
+    .postTitleWraper:hover,
+    .postDescWraper:hover {
+        border: 1px solid #3ca2c3;
+        transition: all 0.2s ease-out;
+    }
+
+    .postSelectBar {
+        width: 70%;
+        margin: 10px 0;
+    }
+
+    /* .postFile {
+        font-family: 'Poppins', sans-serif;
+        font-size: 25px;
+        margin-bottom: 10px;
+    } */
+
+    .btnPost {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        padding: 10px;
+
+        font-size: 15px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+
+        /* background-color: transparent; */
+        background-color: #7978FF;
+        background-image: linear-gradient(to right, #DECBA4, #3E5151);
+
+        color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+
+        align-self: center;
+        width: 100%;
+    }
+
+    .btnPost:hover {
+        background-color: #5F9DF7;
+        background-image: linear-gradient(to right, #6e5e3e, #DECBA4);
+        transition: all 0.3s ease-out;
+        cursor: pointer;
+    }
+
+
+
+
+    /* container for all cards */
+
+    .cardContainer {
+        /* margin-right: 50px; */
+        /* padding-top: 1rem; */
+        /* padding-left: 1rem; */
+
+        /* min-width: 700px; */
+        min-width: 50%;
+
+        border-radius: 10px;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-bottom: 20px;
+        background-color: #ECECF4;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 130vh;
+        /* max-height: 120vh; */
+        /* height: 100%; */
+
+
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        box-shadow: 3px 3px 10px rgb(0 0 0 / 0.2);
+
+    }
+
+
+    /* single card container */
+    .card {
+
+        /* width: 20%;
+        min-width: 300px; */
+
+        width: 45%;
+        min-width: 100px;
+
+        max-height: 500px;
+        background-color: white;
+
+        border-radius: 10px;
+        margin-bottom: 10px;
+
+        display: flex;
+        flex-direction: column;
+
+        box-shadow: 3px 3px 10px rgb(0 0 0 / 0.2);
+    }
+
+    .card:hover {
+        cursor: pointer;
+        background-color: #ededed;
+        transition: all 0.2s ease-out;
+
+    }
+
+
+
+
+    .cardTimeWraper {
+        margin-left: 12px;
+        margin-top: 10px;
+        width: 90%;
+        height: 20px;
+
+        position: relative;
+    }
+
+    .timeImg {
+        margin-left: 5px;
+
+        position: absolute;
+        top: 4px;
+
+    }
+
+    .cardTime {
+        position: absolute;
+        left: 21px;
+        top: 3px;
+        margin-left: 5px;
+
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px;
+    }
+
+
+
+
+
+    .cardImgContainer {
+        /* max-width: 400px; */
+        max-width: 90%;
+        max-height: 170px;
+
+        margin-top: 0px;
+        margin-bottom: 4px;
+
+        overflow: hidden;
+        align-self: center;
+
+
+        border: 1px solid gray;
+        border-radius: 20px;
+    }
+
+    .cardImage {
+        width: 100%;
+
+    }
+
+
+
+    .hr-mid-circle {
+        width: 95%;
+        border: 0;
+        color: #d0d0d5;
+        background: linear-gradient(currentColor, currentColor) no-repeat center;
+        background-size: 100% 1px;
+    }
+
+    .hr-mid-circle::before {
+        content: '';
+        display: block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: currentColor;
+        /* margin: auto; */
+    }
+
+
+    .titleWrapper {
+        margin-left: 12px;
+        margin-bottom: 0px;
+        width: 95%;
+    }
+
+    .cardTitle {
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+    }
+
+    .cardTitle:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+
+
+    .cardCommentWraper {
+        margin-left: 10px;
+        margin-bottom: 10px;
+
+        width: 90%;
+        height: 25px;
+
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    .commentWrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+        justify-content: right;
+        padding: 2px;
+    }
+
+    .cardComment {
+        /* font-family: 'Poppins', sans-serif; */
+        font-family: 'Kameron', serif;
+        font-size: 12px;
+        color: black;
+        margin-right: 10px;
+        margin-left: 5px;
+
+    }
+
+    .commentImg {
+        font-size: 14px;
+        color: gray;
+    }
+
+    .commentWrapper:hover {
+        cursor: pointer;
+        background-color: #F8F8FF;
+        border-radius: 8px;
+    }
+
+
+    .deleteWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .deleteImg {
+        color: gray;
+        font-size: 14px;
+    }
+
+    .deleteImg:hover {
+        color: black;
+    }
+
+    .deleteWrapper:hover {
+        cursor: pointer;
+        background-color: #DC143C;
+        border-radius: 50%;
+    }
+
+
+}
+
+@media screen and (min-width: 1450px) {
+    .card {
+        width: 40%;
+        min-width: 100px;
+    }
+
+}
+
+
+@media screen and (min-width: 1780px) {
+    .card {
+        width: 30%;
+    }
+
+    .PostContainer {
+
+        height: 95vh;
+        /* width: 85%;
+        margin-left: 150px; */
+    }
+
+    .postWrapper {
+        /* width: 50%;
+        max-width: 550px; */
+        height: 95vh;
+    }
+
+    .cardContainer {
+        min-width: 60%;
+
+        height: 90vh;
+        max-height: 90vh;
+    }
+}

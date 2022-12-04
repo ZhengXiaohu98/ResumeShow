@@ -1,5 +1,11 @@
 import { useEffect, useState, useContext, React } from "react";
+import { Link} from "react-router-dom";
+import { Select, List, Space, Card, Button, Modal, Input, Spin } from 'antd';
+import { LikeTwoTone, MessageTwoTone, StarTwoTone } from '@ant-design/icons';
+
 import "./resumebox.css";
+import UserProvider from "../../../Context/UserProvider";
+import useWindowDimensions from "../../WindowDimension/WD"
 
 // major list
 import { majorList } from "../../majors";
@@ -9,21 +15,29 @@ import * as getResumeAPI from "../../../API/GetResume.js";
 import * as updateResumeAPI from "../../../API/PostRequest.js";
 
 
-import { Select, List, Space, Card, Button, Modal, Input } from 'antd';
-import { LikeTwoTone, MessageTwoTone, StarTwoTone } from '@ant-design/icons';
-
-
-import UserProvider from "../../../Context/UserProvider";
 
 const ResumeBox = () => {
+
+  // window's width
+  const { width } = useWindowDimensions();
+
+  //list of post
   let [resumeList, setResumeList] = useState([])
+
+  // use for loading anime
+  const [loading, setLoading] = useState(false);
 
   // get current user
   let user = useContext(UserProvider.context);
 
   // comment text
   let [comment, setComment] = useState("")
-  let [curCommentId, setCurCommentId] = useState(""); 
+  let [curCommentId, setCurCommentId] = useState("");
+
+
+
+
+  //========================== function to sort Post List ========================================
 
   // function to sort the resumes by time
   const sortByTime = () => {
@@ -61,15 +75,20 @@ const ResumeBox = () => {
     setResumeList(tmpList)
   }
 
+  //===========================================================================
+
   // function use to fetch all resumes
   async function fetchAllResume() {
     try {
+      setLoading(true)
       const res = await getResumeAPI.getAllResume();
       res.data.sort(function (a, b) {
         const ta = new Date(a.createdAt), tb = new Date(b.createdAt);
         return ta.getTime() < tb.getTime() ? 1 : -1;
       })
       setResumeList(res.data)
+      setLoading(false)
+
     } catch (err) {
       console.log(err)
     }
@@ -79,7 +98,11 @@ const ResumeBox = () => {
   useEffect(
     () => {
       fetchAllResume();
-    }, []);
+    }, []
+  );
+
+  //===================================================================================
+
 
   const majorOptions = [];
   for (let major of majorList) {
@@ -106,6 +129,9 @@ const ResumeBox = () => {
     fetchFiltedResume();
   };
 
+  //===================================================================================
+
+
   // function dealing with different sort methods
   const handleSortChange = (value) => {
     if (value === 'most recent') {
@@ -117,27 +143,76 @@ const ResumeBox = () => {
     }
   }
 
-  // function to update like
-  async function updateLikes(_id, userId, likes) {
+
+  //================================ Function update DB(using API) ==============================================
+
+  async function updateLikes(_id, userId, post, likes) {
     try {
-      await updateResumeAPI.updateResumeLike(_id, userId, likes);
-    } catch (err) { console.log(err) }
+      setLoading(true)
+
+      //deal with db ann then local state
+      let postList = resumeList;
+      let postTmp = post
+      const index = postList.indexOf(post)
+
+      if (!likes.includes(userId)) {
+        await updateResumeAPI.postLike(_id, userId);
+        postTmp.likes.push(userId);
+      }
+      else {
+        await updateResumeAPI.postDislike(_id, userId);
+        let rmIndex = post.likes.indexOf(userId);
+        postTmp.likes.splice(rmIndex, 1);
+      }
+      postList[index] = post
+      setResumeList([...postList])
+
+      setLoading(false)
+    } catch (err) {
+      console.log(err)
+    }
   }
+
 
   // function to update comments
   async function updateComments(userId) {
     try {
-      console.log(curCommentId  )
+      console.log(curCommentId)
       await updateResumeAPI.updateResumeComment(curCommentId, userId, comment);
     } catch (err) { console.log(err) }
   }
 
   // function to update stars
-  async function updateStars(_id, userId, stars) {
+  async function updateStars(_id, userId, post, stars) {
     try {
-      await updateResumeAPI.updateResumeStar(_id, userId, stars);
-    } catch (err) { console.log(err) }
+      setLoading(true)
+
+      //deal with db ann then local state
+      let postList = resumeList;
+      let postTmp = post
+      const index = postList.indexOf(post)
+
+      if (!stars.includes(userId)) {
+        await updateResumeAPI.postStar(_id, userId);
+        postTmp.stars.push(userId);
+      }
+      else {
+        await updateResumeAPI.postUnStar(_id, userId);
+        let rmIndex = post.likes.indexOf(userId);
+        postTmp.stars.splice(rmIndex, 1);
+      }
+      postList[index] = post
+      setResumeList([...postList])
+
+      setLoading(false)
+    } catch (err) {
+      console.log(err)
+    }
+
   }
+
+  //===================================================================================
+
 
   // use to handle comments
   const [open, setOpen] = useState(false);
@@ -149,10 +224,26 @@ const ResumeBox = () => {
 
   const { TextArea } = Input;
 
+
+  //================================
+  const ScreenResponse = () => {
+    var col = 4;
+    if (width <= 2560) col = 4;
+    if (width <= 1200) col = 3;
+    if (width <= 800) col = 2
+    if (width <= 700) col = 1;
+    return col;
+  }
+
+
   return (
-    <div>
-      {/* Filter section */}
+    <div >
+      {loading && <div className="spin" style={{ zIndex: "1" }}><Spin tip="Loading..."> </Spin></div>}
+
       <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+
+
+        {/* Filter section */}
         <Space.Compact block>
           <Select
             defaultValue="Most Recent"
@@ -189,11 +280,14 @@ const ResumeBox = () => {
           />
         </Space.Compact>
 
+
+
         {/* div for showing the resumes */}
         <List
           grid={{
             gutter: { xs: 8, sm: 16, md: 24, lg: 32 },
-            column: 4,
+            column: ScreenResponse(),
+            // column: 4,
           }}
           size="large"
           bordered
@@ -201,17 +295,24 @@ const ResumeBox = () => {
             onChange: (page) => {
               console.log(page);
             },
-            pageSize: 4,
+            pageSize: 8,
           }}
           dataSource={resumeList}
           renderItem={(item) => (
-            <List.Item key={item._id}>
+            <List.Item key={item._id} 
+            >
               <List.Item.Meta
                 title={
-                  item.title && item.title.length > 30 ?
+                  <Link to={`postdetail/${item._id}`} state={{ item }}>{
+                  // <Link to="/detailpost" state={{ item }}>{
+                    item.title && item.title.length > 30 ?
                     item.title.substr(0, 30) + "..."
                     :
-                    item.title
+                    item.title}</Link>
+                  // item.title && item.title.length > 30 ?
+                  //   item.title.substr(0, 30) + "..."
+                  //   :
+                  //   item.title
                 }
                 description={
                   item.title && item.description.length > 30 ?
@@ -221,29 +322,29 @@ const ResumeBox = () => {
                 }
               />
               <Modal
-                  title="Add a Comment"
-                  open={open}
-                  onOk={
-                    () => {
-                      setConfirmLoading(true);
-                      updateComments(user._id).then(fetchAllResume());
-                      setTimeout(() => {
-                        setOpen(false);
-                        setConfirmLoading(false);
-                        setComment("")
-                      }, 1000);
-                    }
+                title="Add a Comment"
+                open={open}
+                onOk={
+                  () => {
+                    setConfirmLoading(true);
+                    updateComments(user._id).then(fetchAllResume());
+                    setTimeout(() => {
+                      setOpen(false);
+                      setConfirmLoading(false);
+                      setComment("")
+                    }, 1000);
                   }
-                  confirmLoading={confirmLoading}
-                  onCancel={handleCancel}
-                >
-                  <TextArea
-                    placeholder="Enter your comment here..."
-                    allowClear
-                    onChange={(e) => setComment(e.target.value)}
-                    autoSize={{ minRows: 3, maxRows: 5 }}
-                  />
-                </Modal>
+                }
+                confirmLoading={confirmLoading}
+                onCancel={handleCancel}
+              >
+                <TextArea
+                  placeholder="Enter your comment here..."
+                  allowClear
+                  onChange={(e) => setComment(e.target.value)}
+                  autoSize={{ minRows: 3, maxRows: 5 }}
+                />
+              </Modal>
               <Card>
                 <embed height={272} className="cardImage" src={item.file} />
               </Card>
@@ -252,7 +353,7 @@ const ResumeBox = () => {
                 <Button
                   type="text"
                   onClick={() => {
-                    updateLikes(item._id, user._id, item.likes).then(fetchAllResume());
+                    updateLikes(item._id, user._id, item, item.likes);
                   }}
                 >
                   <LikeTwoTone
@@ -278,7 +379,7 @@ const ResumeBox = () => {
                 <Button
                   type="text"
                   onClick={() => {
-                    updateStars(item._id, user._id, item.stars).then(fetchAllResume());
+                    updateStars(item._id, user._id, item, item.stars);
                   }}
                 >
                   <StarTwoTone
@@ -297,3 +398,4 @@ const ResumeBox = () => {
 }
 
 export default ResumeBox;
+

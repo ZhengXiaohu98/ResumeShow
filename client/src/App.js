@@ -9,7 +9,8 @@ import Auth from './component/pages/Auth/Auth';
 import Home from "./component/pages/home/home";
 import Register from "./component/pages/Register/Register";
 import NavBar from "./component/navBar/navBar";
-import Post from "./component/pages/Post/Post";
+import PostContainer from "./component/pages/Post/PostContainer";
+import PostDetail from "./component/pages/PostDetail/PostDetail";
 
 
 
@@ -46,7 +47,13 @@ function App() {
         <Route
           exact
           path="/post"
-          element={checkValidUser(user) ? <Post /> : <Navigate to="/" />}
+          element={checkValidUser(user) ? <PostContainer /> : <Navigate to="/" />}
+        />
+
+        <Route
+          exact
+          path="/postdetail/:id"
+          element={checkValidUser(user) ? <PostDetail /> : <Navigate to="/" />}
         />
 
       </Routes>

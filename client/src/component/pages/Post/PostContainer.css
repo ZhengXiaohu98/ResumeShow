@@ -1,0 +1,23 @@
+.postMenuWrapper {
+    position: fixed;
+    width: 135px;
+    top: 146px;
+
+}
+
+.postMenu {
+    border: 1px solid gainsboro;
+}
+
+
+@media screen and (max-width: 500px) {
+
+    .postMenuWrapper {
+        width: 50px;
+        top: 130px;
+    }
+
+    .postMenu {
+        width: 100%;
+    }
+}

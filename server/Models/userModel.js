@@ -31,7 +31,10 @@ const UserSchema = mongoose.Schema(
             default: null},
 
         //list of post have submitted, arranged by last response time
-        myPosts: []
+        myPosts: [],
+
+        myStars:[],
+        myLikes:[]
 
     },
 

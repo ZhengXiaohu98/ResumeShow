@@ -72,11 +72,11 @@ const NavBar = () => {
         ) : (
           <ul className={click ? "nav-menu active" : "nav-menu"}>
 
-            <Link className="nav-links menu-links" to="/login">
+            <Link className="nav-links menu-links" to="/login" onClick={closeMobileMenu}>
               Login
             </Link>
 
-            <Link className="nav-links menu-links" to="/signup">
+            <Link className="nav-links menu-links" to="/signup" onClick={closeMobileMenu}>
               Signup
             </Link>
           </ul>

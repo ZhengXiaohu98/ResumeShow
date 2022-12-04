@@ -72,5 +72,7 @@ export const majorList = [
   "History",
   "Political Science",
   "Urban Studies/Urban Affairs",
-  "Psychology" 
+  "Psychology",
+  "Others",
+  "None"
 ];
