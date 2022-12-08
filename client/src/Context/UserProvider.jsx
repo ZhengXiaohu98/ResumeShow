@@ -18,6 +18,9 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  // useEffect(() => {
+  //   window.localStorage.setItem("user", JSON.stringify(user))
+  // }, [user]);
 
   useEffect(() => {
     getUser();

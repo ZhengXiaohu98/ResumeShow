@@ -44,7 +44,19 @@ const Auth = () => {
   const [data, setData] = useState(initData);
 
   // check if the user's username or passward is an invalid input
-  const [badInfo, setBadInfo] = useState(false);
+  const [badInfo, setBadInfo] = useState(0);
+
+  const checkForm = () => {
+    if (data.username.length == 0) {
+      setBadInfo(1)
+      return false;
+    }
+    else if ((data.password.length == 0)) {
+      setBadInfo(2)
+      return false;
+    }
+    return true;
+  }
 
   const changeData = (e) => {
     setData(
@@ -57,23 +69,25 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const response = await AuthAPI.logIn(data)
+    if (checkForm()) {
+      const response = await AuthAPI.logIn(data)
 
-    try {
-      //if result is undefined, invalid password or username
-      var loginResult = response.request
-      if (typeof loginResult === 'undefined') {
-        // bad username or passward
-        setBadInfo(true)
-      } else { //check if status is 200, if so, go to home page
-        loginResult = response.request.status
-        if (loginResult == "200") {
-          // this.setState({ user: response.data })
-          window.open("http://localhost:3000", "_self");
+      try {
+        //if result is undefined, invalid password or username
+        var loginResult = response.request
+        if (typeof loginResult === 'undefined') {
+          // bad username or passward
+          setBadInfo(3)
+        } else { //check if status is 200, if so, go to home page
+          loginResult = response.request.status
+          if (loginResult == "200") {
+            // this.setState({ user: response.data })
+            window.open("http://localhost:3000", "_self");
+          }
         }
+      } catch (err) {
+        console.log(err)
       }
-    } catch (err) {
-      console.log(err)
     }
 
   }
@@ -88,10 +102,17 @@ const Auth = () => {
         {/* <div className="signIn"> */}
         <form className="infoForm authform">
           <span className='authTitle'>User Login</span>
-          
-          {badInfo?
-            <span className='authDesc failAuth'>Invalid Username or Wrong Password</span> :
-            <span className='authDesc'>Enter your data to get sign in to your account</span>
+
+          <span className='authDesc'>Enter your data to get sign in to your account</span>
+
+          {badInfo == 1 &&
+            <span className='authDesc failAuth'>Username cannot be empty!</span> 
+          }
+          {badInfo == 2 &&
+            <span className='authDesc failAuth'>Password cannot be empty!</span>
+          }
+          {badInfo == 3 && 
+            <span className='authDesc failAuth'>Invalid Username or Wrong Password</span> 
           }
 
           <div className='infoInputWraper'>

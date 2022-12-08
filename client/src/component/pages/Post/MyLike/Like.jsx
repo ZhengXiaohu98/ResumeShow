@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import UserProvider from "../../../../Context/UserProvider";
+import { Link } from "react-router-dom";
 
 import * as PostAPI from "../../../../API/PostRequest.js";
 import "./MyLike.css";
@@ -140,7 +141,9 @@ const Like = () => {
                                     <div style={{ marginTop: "15px" }} />}
 
                                 <div className="StartitleWrapper">
-                                    <span className="StarcardTitle">{item.title}</span>
+                                    <Link to={`postdetail/${item._id}`} style={{ color: "black", textDecoration: "none" }}>
+                                        <span className="StarcardTitle">{item.title}</span>
+                                    </Link>
                                 </div>
 
                                 <hr class="hr-mid-circle" />

@@ -16,7 +16,7 @@ import mongoose from "mongoose";
 
         isLookForJobs: {
           type: Boolean,
-          default: false
+          default: true
         },
 
         major: {

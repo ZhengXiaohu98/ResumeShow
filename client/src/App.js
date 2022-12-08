@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { createBrowserHistory } from "history";
+
 
 import UserProvider from "./Context/UserProvider";
 
@@ -18,7 +20,11 @@ function App() {
 
   const user = useContext(UserProvider.context);
 
-
+  // const [loggedIn, setLoggedIn] = useState(null);
+  // useEffect(() => {
+  //   const loggedUser = localStorage.getItem('user');
+  //   setLoggedIn(Boolean(loggedUser));
+  // }, []);
 
   return (
     <div className="container">
@@ -26,7 +32,7 @@ function App() {
 
       <NavBar />
 
-      <Routes>
+      <Routes history={createBrowserHistory}>
 
         <Route
           exact
@@ -53,6 +59,11 @@ function App() {
         <Route
           exact
           path="/postdetail/:id"
+          element={checkValidUser(user) ? <PostDetail /> : <Navigate to="/" />}
+        />
+        <Route
+          exact
+          path="post/postdetail/:id"
           element={checkValidUser(user) ? <PostDetail /> : <Navigate to="/" />}
         />
 

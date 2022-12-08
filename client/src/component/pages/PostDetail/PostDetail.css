@@ -1,0 +1,355 @@
+.PDBBigContainer{
+    background-color: #E8ECF4;
+
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.PDBigContainer{
+    background-color: white;
+
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+.PDContainer {
+
+    height: 90%;
+    width: 85%;
+    margin-top: 29px;
+    margin-bottom: 29px;
+
+    background-color: #E8ECF4;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+}
+
+.PDWrapper {
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
+
+
+    border-radius: 8px;
+    height: 100%;
+    width: 80%;
+    padding: 1.3rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 20px;
+
+    /* background-color: #efefef; */
+    background-color: white;
+
+    border-radius: 2px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+}
+
+
+.PDTitleWrapper {
+    /* height: 4rem; */
+    width: 100%;
+
+    border: 1px solid silver;
+    /* border-radius: 8px; */
+    border-width: 1px;
+    border: none;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.PDTitle {
+    margin-left: 5px;
+    width: 97%;
+    /* height: 90%; */
+    font-family: 'Open Sans', sans-serif;
+
+    font-size: 25px;
+    border: none;
+    outline: none;
+}
+
+.PDtagWrapper{
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+.PDtime{
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: grey;
+}
+
+.PDContentWrapper {
+    margin-top: 10px;
+
+    width: 100%;
+
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+}
+
+.PDDesWrapper {
+    /* height: 8rem; */
+    width: 100%;
+
+    /* border: 1px solid silver;
+    border-radius: 8px;
+    border-width: 1px; */
+
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-start; */
+    /* align-items: center; */
+    margin-bottom: 25px;
+}
+
+.PDDes {
+    margin-left: 5px;
+    width: 96%;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.PDfileWrapper {
+    width: 85%;
+    height: 100%;
+
+    align-self: center;
+    border: 1px solid gray;
+    display: flex;
+
+}
+
+.PDfile {
+    align-self: center;
+    width: 100%;
+    
+}
+
+.btnn{
+    width: 40%;
+    align-self: center;
+    margin-top: 50px;
+}
+.btnn:hover{cursor: pointer;}
+
+.PDiconContainer{
+    padding: 8px;
+    border-top: 1px solid silver;
+    margin-top: 20px;
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: flex-end;
+    gap: 8px;
+
+}
+.DPcommentIcon{
+    display: flex;
+}
+.DPComBTNW{
+
+}
+.DPCommentBTN{
+    font-size: 16px;
+    color: gray;
+}
+.DPcomment{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.PDcommentContainer{
+    border-radius: 8px;
+    height: 100%;
+    width: 80%;
+        padding: 1.3rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 20px;
+
+    /* background-color: #efefef; */
+    background-color: white;
+
+    border-radius: 2px;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 13px;
+
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
+
+}
+/* .commentCard{
+    width: 100%;
+    min-height: 5rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid silver;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} */
+
+.commentCard{
+    width: 100%;
+    min-height: 5rem;
+    /* border: 1px solid silver; */
+
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgb(0 0 0 / 0.4);
+}
+
+
+
+.commentDesWrap{
+    padding: 5px;
+    width: 95%;
+    margin-left: 5px;
+
+}
+.commentDes{
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+
+}
+.commentUserContainer{
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+
+}
+.commentUserAvtar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.commentUserWrap{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+.commentUser{
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.PDpostWrapper{
+    width: 80%;
+    padding: 1.3rem;
+
+    background-color: white;
+
+    border-radius: 5px;
+
+    margin-bottom: 15px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.PDpostForm{
+    margin-bottom: 10px;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.PDpostDescWraper{
+    height: 8rem;
+    width: 100%;
+
+    border: 1px solid silver;
+    border-radius: 2px;
+    border-width: 1px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.DPpostDesc {
+    width: 96%;
+    height: 90%;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    border: none;
+    outline: none;
+    resize: none;
+}

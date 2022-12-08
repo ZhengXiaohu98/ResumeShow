@@ -24,9 +24,10 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const response = await AuthAPI.signUp(formData)
-        window.open("http://localhost:3000", "_self");
-
+        if (checkForm()) {
+            const response = await AuthAPI.signUp(formData)
+            window.open("http://localhost:3000", "_self");
+        }
         // try {
         //     const response = await AuthAPI.signUp(formData)
         //     var { data } = response
@@ -54,6 +55,43 @@ const Register = () => {
     }
 
 
+
+    const [badInfo, setBadInfo] = useState(0);
+    const checkForm = () => {
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (formData.Email.length == 0) {
+            setBadInfo(1)
+            return false;
+        }
+        else if ( !re.test(formData.Email)){
+            setBadInfo(6)
+            return false;
+        }
+        if (formData.username.length == 0) {
+            setBadInfo(2)
+            return false;
+        }
+        else if ((formData.password.length == 0)) {
+            setBadInfo(3)
+            return false;
+        }
+        else if ((formData.confirmPassword.length == 0)) {
+            setBadInfo(4)
+            return false;
+        }
+        else if (formData.password !== formData.confirmPassword) {
+            setBadInfo(5)
+            return false;
+        } 
+        
+        return true;
+    }
+
+
+
+
+
     return (
         <div className="auth">
 
@@ -63,15 +101,35 @@ const Register = () => {
 
 
                 <form className="infoForm authform">
-                    <span className='authTitle'>User Signup</span>
-                    <br />
-                    <span className='authDesc'>Enter your infomation to create your own account!</span>
-                    <br />
+                    <span className='authTitle' style={{ marginBottom: "10px" }}>User Signup</span>
+                    <span className='authDesc' style={{ marginBottom: "7px" }}>Enter your infomation to create your own account!</span>
+
+                    {badInfo == 1 &&
+                        <span className='authDesc failAuth'>Email cannot be empty!</span>
+                    }
+                    {badInfo == 2 &&
+                        <span className='authDesc failAuth'>Username cannot be empty!</span>
+                    }
+                    {badInfo == 3 &&
+                        <span className='authDesc failAuth'>Password cannot be empty!</span>
+                    }
+                    {badInfo == 4 &&
+                        <span className='authDesc failAuth' style={{width: "80%"}}>Please enter the confirmPassword!</span>
+                    }
+                    {badInfo == 5 &&
+                        <span className='authDesc failAuth' style={{width: "80%"}}>Comfirm password is wrong. Confirm the Password again!</span>
+                    }
+                    {badInfo == 6 &&
+                        <span className='authDesc failAuth'>Invalid E-mail form!</span>
+                    }
+
+
+
                     <div className='infoInputWraper'>
                         <input
                             className="infoInput"
                             required
-                            type="text"
+                            type="email"
                             placeholder='E-mail'
                             value={formData.Email}
                             name="Email"

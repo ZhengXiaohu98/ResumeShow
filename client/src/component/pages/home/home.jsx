@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, React } from "react";
+import { useState, useContext, React } from "react";
 import "./home.css";
 
 import ResumeBox from "./resumebox";
@@ -7,10 +7,9 @@ import { Divider } from 'antd';
 
 import UserProvider from "../../../Context/UserProvider";
 
-const Home = (userDetails) => {
+const Home = () => {
 
   let user = useContext(UserProvider.context);
-  // const user = userDetails.user;
 
   const logout = () => {
     localStorage.clear();
@@ -18,7 +17,6 @@ const Home = (userDetails) => {
     user = null;
   };
 
-  
   return (
 
     <div>

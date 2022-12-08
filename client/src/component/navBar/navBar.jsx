@@ -15,6 +15,7 @@ const NavBar = () => {
 
   const logout = () => {
     window.open(`${process.env.REACT_APP_API_URL}/auth/logout`, "_self");
+    localStorage.clear();
   };
 
   const handleClick = () => setClick(!click);

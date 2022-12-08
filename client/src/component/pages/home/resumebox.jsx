@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, React } from "react";
-import { Link} from "react-router-dom";
-import { Select, List, Space, Card, Button, Modal, Input, Spin } from 'antd';
-import { LikeTwoTone, MessageTwoTone, StarTwoTone } from '@ant-design/icons';
+import { Link } from "react-router-dom";
+import { Select, List, Space, Card, Button, Modal, Input, Spin} from 'antd';
+import { LikeTwoTone, MessageTwoTone, StarTwoTone, SearchOutlined,ReloadOutlined } from '@ant-design/icons';
 
 import "./resumebox.css";
 import UserProvider from "../../../Context/UserProvider";
@@ -112,22 +112,29 @@ const ResumeBox = () => {
     });
   }
 
-  // function to get the filter major list, then fetch resume
-  const handleFilterChange = (value) => {
-    const filterMajorList = new Array(value)
-    async function fetchFiltedResume() {
-      try {
-        const res = await getResumeAPI.getFiltedResume(filterMajorList);
-        res.data.sort(function (a, b) {
-          return a.likes.length > b.likes.length ? 1 : -1;
-        })
-        setResumeList(res.data)
-      } catch (err) {
-        console.log(err)
-      }
+  const [filterTags, setFilterTags] = useState([])
+  const changeFilterTag = (value) => {
+    setFilterTags(value)
+  }
+  const clearSelected = () => {
+    setFilterTags([])
+    fetchAllResume();
+  }
+
+    // function to get the filter major list, then fetch resume
+    const handleFilterChange = (value) => {
+      async function fetchFiltedResume() {
+        try {
+          const res = await getResumeAPI.getFiltedResume(filterTags);
+          setResumeList(res.data)
+        } catch (err) {
+          console.log(err)
+        }
+      };
+      setLoading(true)
+      fetchFiltedResume();
+      setLoading(false)
     };
-    fetchFiltedResume();
-  };
 
   //===================================================================================
 
@@ -150,7 +157,7 @@ const ResumeBox = () => {
     try {
       setLoading(true)
 
-      //deal with db ann then local state
+      //deal with db and then local state
       let postList = resumeList;
       let postTmp = post
       const index = postList.indexOf(post)
@@ -198,7 +205,7 @@ const ResumeBox = () => {
       }
       else {
         await updateResumeAPI.postUnStar(_id, userId);
-        let rmIndex = post.likes.indexOf(userId);
+        let rmIndex = post.stars.indexOf(userId);
         postTmp.stars.splice(rmIndex, 1);
       }
       postList[index] = post
@@ -274,10 +281,16 @@ const ResumeBox = () => {
             filterSort={(a, b) =>
               (a.label < b.label ? -1 : 1)
             }
+            allowClear
             placeholder="Filter by Majors"
-            onChange={handleFilterChange}
+            onChange={changeFilterTag}
+            value={filterTags}
             options={majorOptions}
           />
+
+          {/* onClick the button. filter the items array according to the selected tags */}
+          <Button className="filterBtn" onClick={handleFilterChange} icon={<SearchOutlined />}>Search</Button>
+          <Button className="filterBtn" onClick={clearSelected} icon={<ReloadOutlined />}></Button>
         </Space.Compact>
 
 
@@ -299,16 +312,16 @@ const ResumeBox = () => {
           }}
           dataSource={resumeList}
           renderItem={(item) => (
-            <List.Item key={item._id} 
+            <List.Item key={item._id}
             >
               <List.Item.Meta
                 title={
-                  <Link to={`postdetail/${item._id}`} state={{ item }}>{
-                  // <Link to="/detailpost" state={{ item }}>{
+                  <Link to={`postdetail/${item._id}`} state={{ item }} >{
+                    // <Link to="/detailpost" state={{ item }}>{
                     item.title && item.title.length > 30 ?
-                    item.title.substr(0, 30) + "..."
-                    :
-                    item.title}</Link>
+                      item.title.substr(0, 30) + "..."
+                      :
+                      item.title}</Link>
                   // item.title && item.title.length > 30 ?
                   //   item.title.substr(0, 30) + "..."
                   //   :

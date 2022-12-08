@@ -185,7 +185,7 @@
 
     .postSelectBar {
         width: 70%;
-        margin: 10px 0;
+        margin: 8px 0;
     }
 
     /* .postFile {
@@ -279,10 +279,8 @@
     }
 
     .card:hover {
-        cursor: pointer;
         background-color: #ededed;
         transition: all 0.2s ease-out;
-
     }
 
 

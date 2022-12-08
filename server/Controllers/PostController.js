@@ -24,7 +24,6 @@ export const getPost = async (req, res) => {
   try {
     const post = await PostModel.findById(id);
     res.status(200).json(post)
-    //res.send(post)
   } catch (error) {
     res.status(500).json(error)
   }
@@ -279,11 +278,13 @@ export const addPostComment = async (req, res) => {
   });
   try {
     await newComment.save();
+    const commentID = newComment._id.toString()
+
     await PostModel.updateOne(
       { _id: id },
-      { $push: { comments: newComment._id.toString() } }
+      { $push: { comments: commentID } }
     );
-    return res.status(200)
+    res.status(200).json(newComment)
   } catch (err) {
     res.status(500).send("Something went wrong, check logs");
   }

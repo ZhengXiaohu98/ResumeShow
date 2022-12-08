@@ -16,7 +16,8 @@ const CommentSchema = mongoose.Schema(
         }
         // to the post id
         //commentTo: string
-    }
+    },    
+    {timestamps: true}
 
 )
 

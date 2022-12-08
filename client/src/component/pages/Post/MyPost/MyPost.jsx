@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import UserProvider from "../../../../Context/UserProvider";
 import FileBase64 from 'react-file-base64';
+import { Link } from "react-router-dom";
 
 import * as PostAPI from "../../../../API/PostRequest.js";
 import "./MyPost.css";
@@ -9,14 +10,14 @@ import useWindowDimensions from "../../../WindowDimension/WD"
 
 import clockImg from "../001-clock.png"
 
-import { Select, notification, Popconfirm, Pagination, Spin, Empty, Tag } from 'antd';
-import { SmileTwoTone, HeartOutlined, StarOutlined, CommentOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Select, notification, Popconfirm, Pagination, Spin, Empty, Tag, Radio } from 'antd';
+import { SmileTwoTone, HeartOutlined, StarOutlined, CommentOutlined, DeleteOutlined, WarningFilled } from '@ant-design/icons';
 import { majorList } from "../../../majors";
 
 
 const MyPost = () => {
 
-    //Pagination:
+    //============================= Pagination =================================
     var numEachPage = 6;
     const [pageSlice, setPageSlice] = useState(
         {
@@ -32,30 +33,63 @@ const MyPost = () => {
         });
     };
 
+
+    //============================= My post list  =================================
+    const [items, setItems] = useState([])
+    async function fetchData() {
+        try {
+            setLoading(true)
+            const result = await PostAPI.getAllMyPosts(userID);
+            const data = result.data
+            setItems(data)
+            setLoading(false)
+
+        } catch (error) {
+            console.log("fetchdata error:")
+            console.log(error)
+        }
+    };
+
+    //============================= Loading anime  =================================
     const [loading, setLoading] = useState(false);
-    const [deletedPageID, setDeletedPageID] = useState("");
-    const selectDelete = (e) => {
-        setDeletedPageID(e.currentTarget.id);
-    }
 
+
+    //============================= Notification anime  =================================
+    const [api, contextHolder] = notification.useNotification();
+
+
+    //============================= Current user =================================
     const user = useContext(UserProvider.context);
-
-    // user object id for testing use.
     const userID = user._id;
 
+
+    //============================= Major option for select bar =================================
+    const majorOptions = [];
+    for (let major of majorList) {
+        majorOptions.push({
+            value: major,
+            label: major,
+        });
+    }
+
+
+    //============================= Post data =================================
     const initPost = {
         userId: userID,
         title: "",
         description: "",
-        major: "",
+        major: "None",
+        isLookForJobs: true,
         file: "",
     }
 
+    // number of characters left can enter in title
+    const [titleLimitDispaly, setTitleLimitDispaly] = useState(70);
+
     const [postData, setPost] = useState(initPost)
     const [postTemp, setTemp] = useState(initPost)
+    //change title, desc
     const changePost = (e) => {
-
-
         setPost(
             { ...postData, [e.target.name]: e.target.value }
         )
@@ -65,6 +99,7 @@ const MyPost = () => {
         var { title } = { [e.target.name]: e.target.value }
         setTitleLimitDispaly(70 - (title.length));
     }
+    //change select bar
     const changeMajor = (value) => {
         setPost(
             { ...postData, "major": value }
@@ -73,49 +108,51 @@ const MyPost = () => {
             { ...postTemp, "major": value.substring(0, 25) + ifAddpoints(value) }
         )
     }
+    //change radio (is looking for job)
+    const changeRadio = (e) => {
+        setPost(
+            { ...postData, "isLookForJobs": e.target.value }
+        )
+        setTemp(
+            { ...postTemp, "isLookForJobs": e.target.value }
+        )
+    }
 
     const ifAddpoints = (words) => {
         return words.length > 25 ? "..." : ""
     }
 
-
-    const [items, setItems] = useState([])
-
-    // use for notification
-    const [api, contextHolder] = notification.useNotification();
-
-
-    const majorOptions = [];
-    for (let major of majorList) {
-        majorOptions.push({
-            value: major,
-            label: major,
-        });
-    }
-
+    //submit a new post
     const onSubmitHandler = async (e) => {
         e.preventDefault();
+        if (isPostdataOk()) {
+            try {
+                setLoading(true)
+                const result = await PostAPI.createPost(postData)
+                setPost(initPost);
+                setTemp(initPost);
+                const { newPost } = result.data
+                setItems([newPost, ...items]);
+                setLoading(false)
 
-        try {
-            setLoading(true)
-            const result = await PostAPI.createPost(postData)
-            setPost(initPost);
-            setTemp(initPost);
-            const { newPost } = result.data
-            setItems([...items, newPost]);
-            setLoading(false)
+                api.open({
+                    message: `Successfully Uploaded resume`,
+                    description: 'Thank you for uploading you resume. Your resume will not be used for any commercial purposes!',
+                    icon: <SmileTwoTone style={{ color: '#108ee9' }} />,
+                    placement: "top"
+                });
 
-            api.open({
-                message: `Successfully Uploaded resume`,
-                description: 'Thank you for uploading you resume. Your resume will not be used for any commercial purposes!',
-                icon: <SmileTwoTone style={{ color: '#108ee9' }} />,
-                placement: "top"
-            });
-
-        } catch (error) {
-            console.log(error)
+            } catch (error) {
+                console.log(error)
+            }
         }
+    }
 
+
+    //============================= Delete Post =================================
+    const [deletedPageID, setDeletedPageID] = useState("");
+    const selectDelete = (e) => {
+        setDeletedPageID(e.currentTarget.id);
     }
 
     const deleteHandler = async (e) => {
@@ -138,32 +175,49 @@ const MyPost = () => {
     }
 
 
-    const { width } = useWindowDimensions();
+    //=========================================================================
 
     useEffect(
         () => {
-            async function fetchData() {
-                try {
-                    setLoading(true)
-                    const result = await PostAPI.getAllMyPosts(userID);
-                    const data = result.data
-                    setItems(data)
-                    setLoading(false)
-
-                } catch (error) {
-                    console.log("fetchdata error:")
-                    console.log(error)
-                }
-            };
-
             fetchData();
-        }
-        , []);
+        }, []
+    );
 
-    const [titleLimitDispaly, setTitleLimitDispaly] = useState(70);
+
+
+    //============================ window width detection ========================================
+    const { width } = useWindowDimensions();
+
+
+    //============================ check post data validation ========================================
+    const isPostdataOk = () => {
+        if (postData.title.length < 20) {
+            api.open({
+                message: `Warning.`,
+                description: 'Title cannot be empty and must have more then 15 characters!',
+                icon: <WarningFilled style={{ color: '#f5222d' }} />,
+                placement: "top"
+            });
+            return false;
+        }
+        if (postData.description.length < 20) {
+            api.open({
+                message: `Warning.`,
+                description: 'Description cannot be empty and must have more then 20 characters!',
+                icon: <WarningFilled style={{ color: '#f5222d' }} />,
+                placement: "top"
+            });
+            return false;
+        }
+        return true;
+    }
+
+
+
+
+
 
     return (
-
 
         <div className="PostBigcontainer">
             {contextHolder}
@@ -213,6 +267,12 @@ const MyPost = () => {
                             options={majorOptions}
                         />
 
+                        <Radio.Group onChange={changeRadio} name="radiogroup" style={{ marginBottom: "8px" }} defaultValue={true}>
+                            <Radio value={true}>Looking for job</Radio>
+                            <Radio value={false}>Have a job</Radio>
+                        </Radio.Group>
+
+
                         <FileBase64
                             className="postFile"
                             type="file"
@@ -225,7 +285,6 @@ const MyPost = () => {
                 </div>
 
                 <div className="cardContainer">
-                    {/* {items?.map(item => ( */}
                     {items && items.length > 0 ?
                         items.slice(pageSlice.minValue, pageSlice.maxValue).map(item => (
 
@@ -236,12 +295,7 @@ const MyPost = () => {
                                     <span className="cardTime">Post created at {item.createdAt.substring(0, 10)}</span>
                                 </div>
 
-                                {/* <div className="tagWrapper">
-                                    <Tag color="gold">#{item.major && item.major}</Tag>
-                                    <Tag  color="green">#{item.major && item.major}</Tag>
-                                </div> */}
                                 <hr class="hr-mid-circle" />
-
 
                                 {item.file ?
                                     (<div className="cardImgContainer">
@@ -251,7 +305,9 @@ const MyPost = () => {
                                     <div style={{ marginTop: "15px" }} />}
 
                                 <div className="titleWrapper">
-                                    <span className="cardTitle">{item.title}</span>
+                                    <Link to={`postdetail/${item._id}`} style={{color:"black", textDecoration:"none"}}>
+                                        <span className="cardTitle">{item.title}</span>
+                                    </Link>
                                 </div>
 
 
@@ -259,8 +315,8 @@ const MyPost = () => {
 
 
                                 <div className="tagWrapper">
-                                    <Tag color="gold" style={{fontSize:"11px"}}>#{item.major && item.major}</Tag>
-                                    <Tag  color="green" style={{fontSize:"11px"}}>#{item.isLookForJobs ? "SeekJob" : "HaveJob"}</Tag>
+                                    <Tag color="gold" style={{ fontSize: "11px" }}>#{item.major && item.major}</Tag>
+                                    <Tag color="green" style={{ fontSize: "11px" }}>#{item.isLookForJobs ? "SeekJob" : "HaveJob"}</Tag>
                                 </div>
 
                                 {/* likes, number of comments */}
@@ -275,7 +331,6 @@ const MyPost = () => {
                                         className="deleteWrapper"
                                     >
                                         <DeleteOutlined className='deleteImg' id={item._id} onClick={selectDelete} />
-                                        {/* <img src={deleteImg} alt="Icons is from flaticon.com" className='deleteImg' /> */}
                                     </Popconfirm>
 
                                     <div className="commentWrapper">
@@ -289,7 +344,6 @@ const MyPost = () => {
                                     </div>
 
                                     <div className="commentWrapper">
-                                        {/* <img src={commentImg} alt="Icons is from flaticon.com" className='commentImg' /> */}
                                         <CommentOutlined className='commentImg' />
                                         <span className="cardComment">{item.comments.length}</span>
                                     </div>

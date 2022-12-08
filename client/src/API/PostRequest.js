@@ -8,7 +8,7 @@ export const createPost = async (postData) => {
 
     var returnData = {};
     try {
-        const { data } = await API.post("/posts", postData).then(
+        await API.post("/posts", postData).then(
             (res)=> returnData = res
         )
     } catch (error) {
@@ -19,12 +19,16 @@ export const createPost = async (postData) => {
 
 
 export const getPost = async (id) => {
+  var returnData = {};
+
     try {
-        const { data } = API.get("/posts/post" + id, { withCredentials: true })
-        return data;
+        await API.get("/posts/post/" + id, { withCredentials: true }).then(
+          (res)=> returnData = res
+        )
     } catch (error) {
         console.log(error)
     }
+    return returnData;
 
 }
 
