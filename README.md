@@ -1,12 +1,12 @@
 ## Resume Show - Menu
-- [About this project](###-About-this-project)
-- [Tools](###-Tools)
-- [Site Looks](###-Site-looks)
-  - [Login page](####-Login-page)
-  - [Post page](####-Post-page)
-  - [Home page](####-Home-page)
-- [Use this project](###-Use-this-project)
-- [The team](###-team)
+- [About this project](##about-this-project)
+- [Tools](##tools)
+- [Site Looks](##site-looks)
+  - [Login page](###login-page)
+  - [Post page](###post-page)
+  - [Home page](###home-page)
+- [Use this project](##use-this-project)
+- [The team](##team)
 ********************************
 
 ### About this project
