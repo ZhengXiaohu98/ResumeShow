@@ -6,7 +6,7 @@
   - [Post page](####post-page)
   - [Home page](####post-page)
 - [Use this project](###use-this-project)
-- [The team](###team)
+- [The team](###Team)
 ********************************
 
 ### About this project
