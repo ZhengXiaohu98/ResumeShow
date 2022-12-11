@@ -5,8 +5,8 @@
   - [Login page](####login-page)
   - [Post page](####post-page)
   - [Home page](####post-page)
-- [Use this project](####use-this-project)
-- [The team](####team)
+- [Use this project](###use-this-project)
+- [The team](###team)
 ********************************
 
 ### About this project
@@ -47,7 +47,7 @@ Users can view the resumes they have posted or the resumes they stared/liked.
 
 Users can view all the posted resumes on this page, and they can filter resumes by disciplines.
 
-#### Use this project
+### Use this project
 
 1. Clone this project
 2. For server run
@@ -61,7 +61,7 @@ npm start
 npm run start
 ```
 
-#### Team
+### Team
 Our team consist of two members. [Xueqi Chen](https://github.com/xqcxqc) worked on building the server and creating APIs for the front-end. [Xiaohu Zheng](https://github.com/ZhengXiaohu98)
 mainly worked on building the home page for the site.
 
