@@ -20,9 +20,9 @@ resume will have a section for users to comment and upvote.
 </p>
 
 ## Tools
-- Front-end: react + ant design for components
-- Back-end: node.js
-- Database: mongo-db 
+- Front-end: React + Ant Design
+- Back-end: Node.js
+- Database: MongoDB 
 
 ## Site looks
 
