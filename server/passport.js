@@ -1,5 +1,7 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as FacebookStrategy } from "passport-facebook";
+import { Strategy as GithubStrategy } from "passport-github";
+
 import passport from "passport";
 import userModel from './Models/userModel.js'
 import dotenv from 'dotenv';
@@ -51,19 +53,64 @@ passport.use(
         }
       });
     }
-    //callback(null, profile); //return profile details
   )
 )
 
+// passport.use(
+//   new FacebookStrategy(
+//     {
+//       clientID: process.env.FB_CLIENT_ID,
+//       clientSecret: process.env.FB_CLIENT_SECRET,
+//       callbackURL: "/auth/facebook/callback",
+//       scope: ["profile", "email"],
+//     },
+//     function(accessToken, refreshToken, profile, done) {
+//       userModel.findOne({
+//         providerUserId: profile.id
+//       }, function (err, user) {
+//         if (err) {
+//           return done(err);
+//         }
+//         if (!user) {
+//           //build username
+//           const mailAddr = profile.emails[0].value
+//           const index = mailAddr.indexOf("@")
+//           const newName = mailAddr.substring(0, index);
+
+//           user = new userModel({
+//             username: newName,
+//             Email: profile.emails[0].value,
+//             password: "unknown",  
+//             name: profile.displayName,
+//             provider: 'facebook',
+//             providerUserId: profile.id,
+//             providerProfile: profile._json
+//           });
+//           user.save(function (err) {
+//             if (err) console.log(err);
+//             return done(err, user);
+//           });
+//         }
+//         //found user. Return
+//         else {
+//           return done(err, user);
+//         }
+//       });
+//     }
+//   )
+// )
+
+
 passport.use(
-  new FacebookStrategy(
+  new GithubStrategy(
     {
-      clientID: process.env.FB_CLIENT_ID,
-      clientSecret: process.env.FB_CLIENT_SECRET,
-      callbackURL: "/auth/facebook/callback",
-      scope: ["profile", "email"],
+      clientID: process.env.CLIENT_ID_GitHub,
+      clientSecret: process.env.CLIENT_SECRET_GitHub,
+      callbackURL: "/auth/github/callback",
+      scope: ["read:user", "user:email"],
     },
     function(accessToken, refreshToken, profile, done) {
+
       userModel.findOne({
         providerUserId: profile.id
       }, function (err, user) {
@@ -71,17 +118,16 @@ passport.use(
           return done(err);
         }
         if (!user) {
-          //build username
-          const mailAddr = profile.emails[0].value
-          const index = mailAddr.indexOf("@")
-          const newName = mailAddr.substring(0, index);
-
+          let email = profile.email
+          if(profile.email == null){
+            email = "null@github.com"
+          }
           user = new userModel({
-            username: newName,
-            Email: profile.emails[0].value,
+            username: profile.username,
+            Email: email,
             password: "unknown",  
-            name: profile.displayName,
-            provider: 'facebook',
+            name: profile.name,
+            provider: 'github',
             providerUserId: profile.id,
             providerProfile: profile._json
           });
@@ -95,9 +141,12 @@ passport.use(
           return done(err, user);
         }
       });
+
     }
   )
 )
+
+
 
 
 //due to using cookie session, need to serialize user

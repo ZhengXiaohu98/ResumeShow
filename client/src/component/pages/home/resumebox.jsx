@@ -171,7 +171,7 @@ const ResumeBox = () => {
         let rmIndex = post.likes.indexOf(userId);
         postTmp.likes.splice(rmIndex, 1);
       }
-      postList[index] = postTmp
+      postList[index] = post
       setResumeList([...postList])
 
       setLoading(false)

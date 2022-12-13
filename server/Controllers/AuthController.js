@@ -29,6 +29,19 @@ export const facebookCallback = () => {
   }
 }
 
+//Github login
+export const githubCallback = () => {
+    try {
+        return (passport.authenticate("github", {
+            successRedirect: process.env.CLIENT_URL,
+            failureRedirect: "/login/failed",
+        }));
+    } catch (error) {
+        console.log("Error in AuthController/githubCallback")
+        console.log(error)
+    }
+  }
+
 
 
 

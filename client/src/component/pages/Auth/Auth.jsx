@@ -9,6 +9,7 @@ import { Routes, Route, Navigate, Link } from "react-router-dom";
 import background from "./background.jpg";
 import google from "./google.svg";
 import facebook from "./facebook.svg";
+import github from './github-mark.svg'
 
 
 
@@ -29,6 +30,16 @@ const Auth = () => {
     try {
       window.open(
         `${process.env.REACT_APP_API_URL}/auth/facebook/callback`,
+        "_self"
+      );
+    } catch (error) {
+      console.log("Auth page, open oauth...  \n" + error)
+    }
+  };
+  const githubAuth = () => {
+    try {
+      window.open(
+        `${process.env.REACT_APP_API_URL}/auth/github/callback`,
         "_self"
       );
     } catch (error) {
@@ -160,9 +171,9 @@ const Auth = () => {
             </div>
 
             <div className="logoWrapper">
-              <img src={facebook} alt='' class="logoIcon" />
-              <button className='button logoBtn' onClick={facebookAuth}>
-                Facebook
+              <img src={github} alt='' class="logoIcon" />
+              <button className='button logoBtn' onClick={githubAuth}>
+                GitHub
               </button>
             </div>
 

@@ -15,6 +15,10 @@ router.get("/google", passport.authenticate("google", ["profile", "email"]));
 router.get("/facebook/callback", AuthController.facebookCallback());
 router.get("/facebook", passport.authenticate("facebook", ["profile", "email"]));
 
+//facebook login
+router.get("/github/callback", AuthController.githubCallback());
+router.get("/github", passport.authenticate("github", ["read:user", "user:email"]));
+
 //regular sign up and login:
 router.post('/register', AuthController.checkAlreadyRegistered, AuthController.registerUser, passport.authenticate("local"), AuthController.login)
 
