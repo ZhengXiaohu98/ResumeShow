@@ -171,8 +171,7 @@ const ResumeBox = () => {
         let rmIndex = post.likes.indexOf(userId);
         postTmp.likes.splice(rmIndex, 1);
       }
-
-      postList[index] = postTmp
+      postList[index] = post
       setResumeList([...postList])
 
       setLoading(false)
@@ -301,7 +300,6 @@ const ResumeBox = () => {
           grid={{
             gutter: { xs: 8, sm: 16, md: 24, lg: 32 },
             column: ScreenResponse(),
-            // column: 4,
           }}
           size="large"
           bordered
@@ -371,7 +369,7 @@ const ResumeBox = () => {
                   }}
                 >
                   <LikeTwoTone
-                    twoToneColor="#eb2f96"
+                    twoToneColor={item.likes.includes(user._id)? "#eb2f96" : "#88CA5E"}
                     className="cardIcon"
                   />
                 </Button>
@@ -397,7 +395,7 @@ const ResumeBox = () => {
                   }}
                 >
                   <StarTwoTone
-                    twoToneColor="#FFD700"
+                    twoToneColor={item.stars.includes(user._id)? "#FFD700" : "#B6B6B4"}
                     className="cardIcon"
                   />
                 </Button>

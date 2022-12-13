@@ -55,49 +55,49 @@ passport.use(
   )
 )
 
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: process.env.FB_CLIENT_ID,
-//       clientSecret: process.env.FB_CLIENT_SECRET,
-//       callbackURL: "/auth/facebook/callback",
-//       scope: ["profile", "email"],
-//     },
-//     function(accessToken, refreshToken, profile, done) {
-//       userModel.findOne({
-//         providerUserId: profile.id
-//       }, function (err, user) {
-//         if (err) {
-//           return done(err);
-//         }
-//         if (!user) {
-//           //build username
-//           const mailAddr = profile.emails[0].value
-//           const index = mailAddr.indexOf("@")
-//           const newName = mailAddr.substring(0, index);
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FB_CLIENT_ID,
+      clientSecret: process.env.FB_CLIENT_SECRET,
+      callbackURL: "/auth/facebook/callback",
+      scope: ["profile", "email"],
+    },
+    function(accessToken, refreshToken, profile, done) {
+      userModel.findOne({
+        providerUserId: profile.id
+      }, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          //build username
+          const mailAddr = profile.emails[0].value
+          const index = mailAddr.indexOf("@")
+          const newName = mailAddr.substring(0, index);
 
-//           user = new userModel({
-//             username: newName,
-//             Email: profile.emails[0].value,
-//             password: "unknown",  
-//             name: profile.displayName,
-//             provider: 'facebook',
-//             providerUserId: profile.id,
-//             providerProfile: profile._json
-//           });
-//           user.save(function (err) {
-//             if (err) console.log(err);
-//             return done(err, user);
-//           });
-//         }
-//         //found user. Return
-//         else {
-//           return done(err, user);
-//         }
-//       });
-//     }
-//   )
-// )
+          user = new userModel({
+            username: newName,
+            Email: profile.emails[0].value,
+            password: "unknown",  
+            name: profile.displayName,
+            provider: 'facebook',
+            providerUserId: profile.id,
+            providerProfile: profile._json
+          });
+          user.save(function (err) {
+            if (err) console.log(err);
+            return done(err, user);
+          });
+        }
+        //found user. Return
+        else {
+          return done(err, user);
+        }
+      });
+    }
+  )
+)
 
 
 //due to using cookie session, need to serialize user
