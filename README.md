@@ -28,10 +28,10 @@ resume will have a section for users to comment and upvote.
 
 ### Login page
 <p align="center">
-<img src="https://user-images.githubusercontent.com/70027806/206890231-14f02621-c426-43f2-8393-f3f8cb3e8011.png" width="400"/>
+<img src="https://user-images.githubusercontent.com/70027806/207454748-4171cec0-6af6-4e0f-b78a-b187058052a3.png" width="400"/>
 </p>
 
-We implemented **Google** and **Facebook** login for better user experience, but users can also register their own accounts on our site.
+We implemented **Google** and **Github** login for better user experience, but users can also register their own accounts on our site.
 
 ### Post page
 <p align="center">
