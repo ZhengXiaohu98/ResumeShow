@@ -171,7 +171,8 @@ const ResumeBox = () => {
         let rmIndex = post.likes.indexOf(userId);
         postTmp.likes.splice(rmIndex, 1);
       }
-      postList[index] = post
+
+      postList[index] = postTmp
       setResumeList([...postList])
 
       setLoading(false)
@@ -208,7 +209,7 @@ const ResumeBox = () => {
         let rmIndex = post.stars.indexOf(userId);
         postTmp.stars.splice(rmIndex, 1);
       }
-      postList[index] = post
+      postList[index] = postTmp
       setResumeList([...postList])
 
       setLoading(false)
