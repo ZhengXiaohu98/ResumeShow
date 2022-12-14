@@ -93,7 +93,7 @@ const Auth = () => {
           loginResult = response.request.status
           if (loginResult == "200") {
             // this.setState({ user: response.data })
-            window.open("http://localhost:3000", "_self");
+            window.open(process.env.REACT_APP_URL, "_self");
           }
         }
       } catch (err) {

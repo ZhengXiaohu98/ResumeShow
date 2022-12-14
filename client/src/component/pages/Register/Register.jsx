@@ -26,7 +26,7 @@ const Register = () => {
 
         if (checkForm()) {
             const response = await AuthAPI.signUp(formData)
-            window.open("http://localhost:3000", "_self");
+            window.open(process.env.REACT_APP_URL, "_self");
         }
         // try {
         //     const response = await AuthAPI.signUp(formData)
