@@ -43,8 +43,8 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true }))
 
 app.use(
 	cors({
-		//origin: "http://localhost:3000",
-		methods: "GET,POST,PUT,DELETE",
+		// origin: "http://localhost:3000",
+		methods: "*",
 		origin: true,
 		credentials: true,
 	})
