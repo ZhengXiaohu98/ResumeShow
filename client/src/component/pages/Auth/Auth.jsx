@@ -76,7 +76,6 @@ const Auth = () => {
   }
 
 
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -100,9 +99,7 @@ const Auth = () => {
         console.log(err)
       }
     }
-
   }
-
 
   return (
     <div className="auth">
@@ -117,13 +114,13 @@ const Auth = () => {
           <span className='authDesc'>Enter your data to get sign in to your account</span>
 
           {badInfo == 1 &&
-            <span className='authDesc failAuth'>Username cannot be empty!</span> 
+            <span className='authDesc failAuth'>Username cannot be empty!</span>
           }
           {badInfo == 2 &&
             <span className='authDesc failAuth'>Password cannot be empty!</span>
           }
-          {badInfo == 3 && 
-            <span className='authDesc failAuth'>Invalid Username or Wrong Password</span> 
+          {badInfo == 3 &&
+            <span className='authDesc failAuth'>Invalid Username or Wrong Password</span>
           }
 
           <div className='infoInputWraper'>
