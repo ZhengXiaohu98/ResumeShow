@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 
-
 /***************************************
 *             Google Login             *
 ***************************************/
@@ -29,7 +28,6 @@ export const githubCallback = () => {
       failureRedirect: "/login/failed",
     }));
   } catch (error) {
-    console.log("Error in AuthController/githubCallback")
     console.log(error)
   }
 }
@@ -96,8 +94,7 @@ export const login = (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const rule = { ...user }
-            jwt.sign(rule, "secret", { expiresIn: "3d" }, (err, token) => {
+            jwt.sign({...user }, "secret", { expiresIn: "3d" }, (err, token) => {
               res.status(200).json({
                 success: true,
                 token: "Bearer " + token

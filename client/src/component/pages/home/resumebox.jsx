@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, React } from "react";
 import { Link } from "react-router-dom";
 import { Select, List, Space, Card, Button, Modal, Input, Spin } from 'antd';
-import { LikeTwoTone, MessageTwoTone, StarTwoTone, SearchOutlined, ReloadOutlined } from '@ant-design/icons';
+import { LikeTwoTone, MessageTwoTone, StarTwoTone, SearchOutlined, ReloadOutlined, EyeTwoTone } from '@ant-design/icons';
 
 import "./resumebox.css";
 import UserProvider from "../../../Context/UserProvider";
@@ -309,16 +309,15 @@ const ResumeBox = () => {
             >
               <List.Item.Meta
                 title={
-                  <Link to={`postdetail/${item._id}`} state={{ item }} >{
-                    // <Link to="/detailpost" state={{ item }}>{
-                    item.title && item.title.length > 30 ?
-                      item.title.substr(0, 30) + "..."
-                      :
-                      item.title}</Link>
-                  // item.title && item.title.length > 30 ?
-                  //   item.title.substr(0, 30) + "..."
-                  //   :
-                  //   item.title
+                  <Link to={`postdetail/${item._id}`} state={{ item }} >
+                    {
+                      item.title && item.title.length > 30 ?
+                        item.title.substr(0, 30) + "..."
+                        :
+                        item.title
+                    }&nbsp;
+                    <EyeTwoTone twoToneColor="#52c41a"/>
+                  </Link>
                 }
                 description={
                   item.title && item.description.length > 30 ?

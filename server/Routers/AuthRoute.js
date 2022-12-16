@@ -8,7 +8,7 @@ const router = express();
 router.get("/google/callback", AuthController.googleCallback());
 router.get("/google", passport.authenticate("google", ["profile", "email"]));
 
-//facebook login
+//github login
 router.get("/github/callback", AuthController.githubCallback());
 router.get("/github", passport.authenticate("github", ["read:user", "user:email"]));
 

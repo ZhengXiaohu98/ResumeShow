@@ -11,7 +11,7 @@ import useWindowDimensions from "../../../WindowDimension/WD"
 import clockImg from "../001-clock.png"
 
 import { Select, notification, Popconfirm, Pagination, Spin, Empty, Tag, Radio } from 'antd';
-import { SmileTwoTone, HeartOutlined, StarOutlined, CommentOutlined, DeleteOutlined, WarningFilled } from '@ant-design/icons';
+import { SmileTwoTone, HeartTwoTone, StarTwoTone, MessageTwoTone, DeleteTwoTone, WarningFilled, EyeTwoTone } from '@ant-design/icons';
 import { majorList } from "../../../majors";
 
 
@@ -217,7 +217,15 @@ const MyPost = () => {
 
         <div className="postWrapper">
           {width >= 1250 && <div className="postPicWrapper"><embed className='postPic' src='https://ideas.ted.com/wp-content/uploads/sites/3/2017/09/featured_art_istock_work_home.jpg?resize=750,450'></embed></div>}
-          {width >= 1250 && <pre className='postData'>{JSON.stringify(postTemp, null, '\t')}</pre>}
+
+          {/* File preview section */}
+          {
+            postData.file
+            &&
+            <div className="cardImgContainer">
+              <embed className="cardImage" src={postData.file} />
+            </div>
+          }
 
           <form className='postForm ' action="">
 
@@ -227,7 +235,7 @@ const MyPost = () => {
                 maxLength={70}
                 minLength={1}
                 className="postTitle"
-                placeholder=' Title'
+                placeholder=' Your Resume Title Here'
                 name='title'
                 value={postData.title}
                 onChange={changePost}
@@ -240,7 +248,7 @@ const MyPost = () => {
               <textarea
                 type="text"
                 className="postDesc"
-                placeholder=' Description'
+                placeholder=' Please provide a description for your resume'
                 name='description'
                 value={postData.description}
                 onChange={changePost}
@@ -259,19 +267,20 @@ const MyPost = () => {
             />
 
             <Radio.Group onChange={changeRadio} name="radiogroup" style={{ marginBottom: "8px" }} defaultValue={true}>
-              <Radio value={true}>Looking for job</Radio>
-              <Radio value={false}>Have a job</Radio>
+              <Radio value={true}>Seeking Jobs</Radio>
+              <Radio value={false}>Not Seeking Jobs</Radio>
             </Radio.Group>
 
+            <div className="uploadfile-container">
+              <FileBase64
+                id="uploadFile"
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) => { setPost({ ...postData, file: base64 }); setTemp({ ...postTemp, file: base64.substring(0, 50) + "..." }) }}
+              />
+            </div>
 
-            <FileBase64
-              className="postFile"
-              type="file"
-              multiple={false}
-              onDone={({ base64 }) => { setPost({ ...postData, file: base64 }); setTemp({ ...postTemp, file: base64.substring(0, 50) + "..." }) }}
-            />
-            <button className="btnPost" onClick={onSubmitHandler}>Post</button>
-
+            <button className="btnPost" onClick={onSubmitHandler}>Upload</button>
           </form>
         </div>
 
@@ -297,7 +306,7 @@ const MyPost = () => {
 
                 <div className="titleWrapper">
                   <Link to={`postdetail/${item._id}`} style={{ color: "black", textDecoration: "none" }}>
-                    <span className="cardTitle">{item.title}</span>
+                    <span className="cardTitle">{item.title}</span>&nbsp;<EyeTwoTone twoToneColor="#52c41a"/>
                   </Link>
                 </div>
 
@@ -315,27 +324,27 @@ const MyPost = () => {
 
                   <Popconfirm
                     placement="rightBottom"
-                    title={"Selected Post will be deleted. Are you sure?"}
+                    title={"This will delete your posted resume. Are you sure?"}
                     onConfirm={deleteHandler}
                     okText="Yes"
                     cancelText="No"
                     className="deleteWrapper"
                   >
-                    <DeleteOutlined className='deleteImg' id={item._id} onClick={selectDelete} />
+                    <DeleteTwoTone twoToneColor="#ff0e0e" className='deleteImg' id={item._id} onClick={selectDelete} />
                   </Popconfirm>
 
                   <div className="commentWrapper">
-                    <StarOutlined className='commentImg' />
+                    <StarTwoTone twoToneColor="#FF9529" className='commentImg' />
                     <span className="cardComment">{item.stars.length}</span>
                   </div>
 
                   <div className="commentWrapper">
-                    <HeartOutlined className='commentImg' />
+                    <HeartTwoTone twoToneColor="#eb2f96" className='commentImg' />
                     <span className="cardComment">{item.likes.length}</span>
                   </div>
 
                   <div className="commentWrapper">
-                    <CommentOutlined className='commentImg' />
+                    <MessageTwoTone className='commentImg' />
                     <span className="cardComment">{item.comments.length}</span>
                   </div>
                 </div>
@@ -364,11 +373,3 @@ const MyPost = () => {
 }
 
 export default MyPost;
-
-
-
-
-
-
-
-

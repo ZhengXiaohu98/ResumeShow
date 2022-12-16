@@ -186,8 +186,6 @@
     color: gray;
 }
 .StarcommentWrapper:hover {
-    cursor: pointer;
-    background-color: #F8F8FF;
     border-radius: 8px;
     transition: all 0.2s ease-out;
 }
@@ -210,8 +208,8 @@
 
 .StardeleteWrapper:hover {
     cursor: pointer;
-    background-color: #DC143C;
     border-radius: 50%;
+    scale: 150%;
     transition: all 0.3s ease-out;
 }
 

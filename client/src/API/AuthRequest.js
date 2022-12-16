@@ -6,11 +6,18 @@ const API = axios.create({ baseURL: process.env.REACT_APP_API_URL })
 *************/
 export const logIn = async (formData) => {
   let returnRes = {} // holds for return result
+  let options = { withCredentials: true }
+  const token = localStorage.getItem('token');
+  if (token) {
+    options.headers = {
+      'Authorization': `Bearer ${token}`
+    }
+  }
   try {
     await API.post(
       '/auth/login',
       formData,
-      { withCredentials: true }
+      options
     ).then((res) => {
       returnRes = res
     })

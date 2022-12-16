@@ -1,49 +1,52 @@
-.spin{
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    /* background: rgba(169,169,169, .3); */
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
+.spin {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  /* background: rgba(169,169,169, .3); */
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.uploadfile-container input[type=file] {
+  color: #DC143C;
+}
 
 .PostBigcontainer {
-    /* background-image: linear-gradient(to right, #DECBA4, #3E5151); */
+  /* background-image: linear-gradient(to right, #DECBA4, #3E5151); */
 
-    height: 100%;
-    width: 100%;
-    background-color: #E8ECF4;
+  height: 100%;
+  width: 100%;
+  background-color: #E8ECF4;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .PostContainer {
 
-    height: 100%;
-    width: 65%;
-    padding: 2rem;
+  height: 100%;
+  width: 65%;
+  padding: 2rem;
 
-    /* background-color: #efefef; */
-    background-color: white;
+  /* background-color: #efefef; */
+  background-color: white;
 
-    border-radius: 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+  border-radius: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
 }
 
@@ -53,147 +56,142 @@
 
 .postWrapper {
 
-    width: 100%;
-    background-color: white;
+  width: 100%;
+  background-color: white;
 
-    border-radius: 5px;
+  border-radius: 5px;
 
-    margin-bottom: 15px;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  margin-bottom: 15px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
 }
 
 /* for <pre> */
 .postData {
-    width: 90%;
-    padding: 1rem;
-    margin: 20px 10px;
-    border: 1px solid gainsboro;
-    border-radius: 20px;
-    background-color: gainsboro;
+  width: 90%;
+  padding: 1rem;
+  margin: 20px 10px;
+  border: 1px solid gainsboro;
+  border-radius: 20px;
+  background-color: gainsboro;
 
 }
 
 
 .postForm {
 
-    /* a rgba value for the background color - white with a 90% transparency. */
-    /* background: rgba(255, 255, 255, 0.5); */
-    margin-bottom: 10px;
-    margin-top: 20px;
+  /* a rgba value for the background color - white with a 90% transparency. */
+  /* background: rgba(255, 255, 255, 0.5); */
+  margin-bottom: 10px;
+  margin-top: 20px;
 
-    width: 90%;
+  width: 90%;
 
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 
 .postTitleWraper {
-    height: 2.1rem;
-    width: 100%;
+  height: 2.1rem;
+  width: 100%;
 
-    border: 1px solid silver;
-    border-radius: 8px;
-    border-width: 1px;
+  border: 1px solid silver;
+  border-radius: 8px;
+  border-width: 1px;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 7px;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 7px;
+  align-items: center;
 }
 
 .postTitle {
-    width: 90%;
-    height: 90%;
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    border: none;
-    outline: none;
-    border-right: 1px solid silver;
+  width: 90%;
+  height: 90%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  border-right: 1px solid silver;
 }
-.postTitleWords{
-    font-size: 11px;
-    font-family: 'Poppins', sans-serif;
-    color: gray;
+
+.postTitleWords {
+  font-size: 11px;
+  font-family: 'Poppins', sans-serif;
+  color: gray;
 }
 
 
 .postDescWraper {
-    height: 8rem;
-    width: 100%;
+  height: 8rem;
+  width: 100%;
 
-    border: 1px solid silver;
-    border-radius: 8px;
-    border-width: 1px;
+  border: 1px solid silver;
+  border-radius: 8px;
+  border-width: 1px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .postDesc {
-    width: 96%;
-    height: 90%;
-    font-size: 18px;
-    font-family: 'Poppins', sans-serif;
-    border: none;
-    outline: none;
-    resize: none;
+  width: 96%;
+  height: 90%;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  outline: none;
+  resize: none;
 }
 
 .postTitleWraper:hover,
 .postDescWraper:hover {
-    border: 1px solid #3ca2c3;
-    transition: all 0.2s ease-out;
+  border: 1px solid #3ca2c3;
+  transition: all 0.2s ease-out;
 }
 
 .postSelectBar {
-    width: 50%;
-    margin: 8px 0;
+  width: 50%;
+  margin: 8px 0;
 }
 
-/* .postFile {
-    font-family: 'Poppins', sans-serif;
-    font-size: 25px;
-    margin-bottom: 10px;
-} */
-
 .btnPost {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  padding: 10px;
 
-    font-size: 15px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
 
-    /* background-color: transparent; */
-    background-color: #7978FF;
-    background-image: linear-gradient(to right, #7978FF, #5F9DF7);
+  /* background-color: transparent; */
+  background-color: #7978FF;
+  background-image: linear-gradient(to right, #7978FF, #5F9DF7);
 
-    color: white;
-    border: 1px solid white;
-    border-radius: 5px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
 
-    align-self: center;
-    width: 100%;
+  align-self: center;
+  width: 100%;
 }
 
 .btnPost:hover {
-    background-color: #5F9DF7;
-    background-image: linear-gradient(to right, #5F9DF7, #7978FF);
+  background-color: #5F9DF7;
+  background-image: linear-gradient(to right, #5F9DF7, #7978FF);
 
-    transition: all 0.3s ease-out;
-    cursor: pointer;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
 }
 
 
@@ -202,32 +200,32 @@
 /* container for all cards */
 
 .cardContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 
 /* single card container */
 .card {
-    width: 100%;
+  width: 100%;
 
-    max-height: 550px;
-    background-color: white;
+  max-height: 550px;
+  background-color: white;
 
-    border-radius: 5px;
-    margin-bottom: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    box-shadow: 3px 3px 10px rgb(0 0 0 / 0.2);
+  box-shadow: 3px 3px 10px rgb(0 0 0 / 0.2);
 }
 
 .card:hover {
-    background-color: #ededed;
-    transition: all 0.2s ease-out;
+  background-color: #ededed;
+  transition: all 0.2s ease-out;
 
 }
 
@@ -235,169 +233,169 @@
 
 
 .cardTimeWraper {
-    margin-left: 20px;
-    margin-top: 15px;
-    width: 90%;
-    height: 25px;
+  margin-left: 20px;
+  margin-top: 15px;
+  width: 90%;
+  height: 25px;
 
-    position: relative;
+  position: relative;
 }
 
 .timeImg {
-    margin-left: 5px;
+  margin-left: 5px;
 
-    position: absolute;
-    top: 4px;
+  position: absolute;
+  top: 4px;
 
 }
 
 .cardTime {
-    position: absolute;
-    left: 21px;
-    margin-left: 5px;
-    color: #696969;
+  position: absolute;
+  left: 21px;
+  margin-left: 5px;
+  color: #696969;
 
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
 }
 
 
-.tagWrapper{
-    width: 90%;
-    align-self:center;
-    /* margin-top: 5px; */
-    margin-bottom: 9px;
+.tagWrapper {
+  width: 90%;
+  align-self: center;
+  /* margin-top: 5px; */
+  margin-bottom: 9px;
 
 }
 
 
 .cardImgContainer {
-    /* max-width: 400px; */
-    max-width: 90%;
-    max-height: 270px;
+  /* max-width: 400px; */
+  max-width: 90%;
+  max-height: 270px;
 
-    margin-top: 10px;
-    /* margin-bottom: 20px; */
-    margin-bottom: 10px;
+  margin-top: 10px;
+  /* margin-bottom: 20px; */
+  margin-bottom: 10px;
 
-    overflow: hidden;
-    align-self: center;
+  overflow: hidden;
+  align-self: center;
 
-    border: 1px solid gray;
-    border-radius: 20px;
+  border: 1px solid gray;
+  border-radius: 20px;
 }
 
 .cardImage {
-    width: 100%;
+  width: 100%;
 
 }
 
 
 
 .hr-mid-circle {
-    width: 95%;
-    border: 0;
-    color: #d0d0d5;
-    background: linear-gradient(currentColor, currentColor) no-repeat center;
-    background-size: 100% 1px;
+  width: 95%;
+  border: 0;
+  color: #d0d0d5;
+  background: linear-gradient(currentColor, currentColor) no-repeat center;
+  background-size: 100% 1px;
 }
 
 .hr-mid-circle::before {
-    content: '';
-    display: block;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: currentColor;
-    /* margin: auto; */
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
+  /* margin: auto; */
 }
 
 
 .titleWrapper {
-    margin-left: 20px;
-    margin-bottom: 15px;
-    width: 95%;
+  margin-left: 20px;
+  margin-bottom: 15px;
+  width: 95%;
 }
 
 .cardTitle {
-    font-family: 'Poppins', sans-serif;
-    font-size: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 25px;
 }
 
 .cardTitle:hover {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 
 
 .cardCommentWraper {
-    margin-left: 20px;
-    margin-bottom: 15px;
+  margin-left: 20px;
+  margin-bottom: 15px;
 
-    width: 90%;
-    height: 25px;
+  width: 90%;
+  height: 25px;
 
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
 
 }
 
 .commentWrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    align-items: center;
-    justify-content: right;
-    padding: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: right;
+  padding: 8px;
 
 }
 
 .cardComment {
-    /* font-family: 'Poppins', sans-serif; */
-    font-family: 'Kameron', serif;
-    font-size: 15px;
-    color: gray;
-    margin-right: 10px;
-    margin-left: 5px;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Kameron', serif;
+  font-size: 15px;
+  color: gray;
+  margin-right: 10px;
+  margin-left: 5px;
 
 }
 
 .commentImg {
-    font-size: 16px;
-    color: gray;
+  font-size: 16px;
+  color: gray;
 }
+
 .commentWrapper:hover {
-    cursor: pointer;
-    background-color: #F8F8FF;
-    border-radius: 8px;
-    transition: all 0.2s ease-out;
+  border-radius: 8px;
+  transition: all 0.2s ease-out;
 }
 
 
-.deleteWrapper{
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+.deleteWrapper {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
+
 .deleteImg {
-    color: gray;
-    font-size: 16px;
+  color: gray;
+  font-size: 16px;
 }
-.deleteImg:hover{
-    color: black;
+
+.deleteImg:hover {
+  color: black;
 }
 
 .deleteWrapper:hover {
-    cursor: pointer;
-    background-color: #DC143C;
-    border-radius: 50%;
-    transition: all 0.3s ease-out;
+  cursor: pointer;
+  scale: 150%;
+  transition: all 0.3s ease-out;
 }
 
 
@@ -405,16 +403,16 @@
 
 
 textarea::-webkit-scrollbar {
-    width: 0.7em;
+  width: 0.7em;
 }
 
 textarea::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 textarea::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid #efefef;
+  background-color: darkgrey;
+  outline: 1px solid #efefef;
 }
 
 
@@ -424,19 +422,21 @@ textarea::-webkit-scrollbar-thumb {
 
 
 @media screen and (max-width: 900px) {
-    .postSelectBar {
-        width: 75%
-    }
+  .postSelectBar {
+    width: 75%
+  }
 
-    .titleWrapper {
-        margin-left: 14px;
-    }
-    .deleteWrapper{
-        padding: 5px;
-    }
-    .commentWrapper{
-        padding: 5px;
-    }
+  .titleWrapper {
+    margin-left: 14px;
+  }
+
+  .deleteWrapper {
+    padding: 5px;
+  }
+
+  .commentWrapper {
+    padding: 5px;
+  }
 
 }
 
@@ -446,59 +446,56 @@ textarea::-webkit-scrollbar-thumb {
 
 @media screen and (max-width: 500px) {
 
-    .postTitle {
-        font-size: 14px;
-    }
+  .postTitle {
+    font-size: 14px;
+  }
 
-    .postDesc {
-        font-size: 12px;
-    }
+  .postDesc {
+    font-size: 12px;
+  }
 
-    .postSelectBar {
-        width: 90%
-    }
+  .postSelectBar {
+    width: 90%
+  }
 
-    .cardTime {
-        top: 4px;
-        font-size: 10px;
-    }
+  .cardTime {
+    top: 4px;
+    font-size: 10px;
+  }
 
-    .cardTitle {
-        margin: 0;
-        font-size: 12px;
-    }
+  .cardTitle {
+    margin: 0;
+    font-size: 12px;
+  }
 
-    .titleWrapper {
-        margin-left: 10px;
-    }
+  .titleWrapper {
+    margin-left: 10px;
+  }
 
+  .cardCommentWraper {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
 
+  .commentImg {
+    font-size: 14px;
+  }
 
-    .cardCommentWraper {
-        margin-left: 10px;
-        margin-bottom: 10px;
-    }
-
-    .commentImg {
-        font-size: 14px;
-    }
-
-    .cardComment {
-        font-size: 12px;
-        color: black;
-        margin-right: 12px;
-        margin-left: 0;
-    }
+  .cardComment {
+    font-size: 12px;
+    color: black;
+    margin-right: 12px;
+    margin-left: 0;
+  }
 
 
-    .deleteImg {
-        width: 18px;
-        height: 18px;
-    }
+  .deleteImg {
+    width: 18px;
+    height: 18px;
+  }
 
-    .deleteImg:active {
-        width: 17px;
-        height: 17px;
-    }
+  .deleteImg:active {
+    width: 17px;
+    height: 17px;
+  }
 }
-

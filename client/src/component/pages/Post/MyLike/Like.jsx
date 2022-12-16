@@ -8,7 +8,7 @@ import "./MyLike_full.css"
 import clockImg from "../001-clock.png"
 
 import { notification, Popconfirm, Pagination, Spin, Empty, Tag } from 'antd';
-import { HeartOutlined, StarOutlined, CommentOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EyeTwoTone, HeartTwoTone, StarTwoTone, MessageTwoTone, CloseSquareTwoTone } from '@ant-design/icons';
 
 
 const Like = () => {
@@ -113,7 +113,8 @@ const Like = () => {
 
                 <div className="StartitleWrapper">
                   <Link to={`postdetail/${item._id}`} style={{ color: "black", textDecoration: "none" }}>
-                    <span className="StarcardTitle">{item.title}</span>
+                    <span className="StarcardTitle">{item.title}</span>&nbsp;
+                    <EyeTwoTone twoToneColor="#52c41a"/>
                   </Link>
                 </div>
 
@@ -130,29 +131,27 @@ const Like = () => {
 
                   <Popconfirm
                     placement="rightBottom"
-                    title={"Delete the post from Likes. click Yes to Confirm."}
+                    title={"Unlick this resume? This will remove this resume from your like list."}
                     onConfirm={deleteHandler}
                     okText="Yes"
                     cancelText="No"
                     className="StardeleteWrapper"
                   >
-                    <DeleteOutlined className='StardeleteImg' id={item._id} onClick={selectDelete} />
-                    {/* <img src={deleteImg} alt="Icons is from flaticon.com" className='deleteImg' /> */}
+                    <CloseSquareTwoTone twoToneColor="#ff0e0e" className='StardeleteImg' id={item._id} onClick={selectDelete} />
                   </Popconfirm>
 
                   <div className="StarcommentWrapper">
-                    <StarOutlined className='StarcommentImg' />
+                    <StarTwoTone twoToneColor="#FF9529" className='StarcommentImg' />
                     <span className="StarcardComment">{item.stars.length}</span>
                   </div>
 
                   <div className="StarcommentWrapper">
-                    <HeartOutlined className='StarcommentImg' />
+                    <HeartTwoTone twoToneColor="#eb2f96" className='StarcommentImg' />
                     <span className="StarcardComment">{item.likes.length}</span>
                   </div>
 
                   <div className="StarcommentWrapper">
-                    {/* <img src={commentImg} alt="Icons is from flaticon.com" className='commentImg' /> */}
-                    <CommentOutlined className='StarcommentImg' />
+                    <MessageTwoTone className='StarcommentImg' />
                     <span className="StarcardComment">{item.comments.length}</span>
                   </div>
                 </div>

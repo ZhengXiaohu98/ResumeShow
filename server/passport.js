@@ -1,5 +1,7 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as GithubStrategy } from "passport-github";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+
 
 import passport from "passport";
 import userModel from './Models/userModel.js'
@@ -96,6 +98,7 @@ passport.use(
             if (err) console.log(err);
             return done(err, user);
           });
+
         }
         //found user. Return
         else {
@@ -110,11 +113,11 @@ passport.use(
 /***************************************
 *       Using JWToken                  *
 ***************************************/
-const JwtStrategy = require('passport-jwt').Strategy
-const ExtractJwt = require('passport-jwt').ExtractJwt
-const opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
-opts.secretOrKey = "secret"
+
+const opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: "secret"
+}
 
 passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
   User.findById(jwt_payload._id)

@@ -1,10 +1,10 @@
-
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import cors from "cors";
 import passport from "passport";
+
 dotenv.config();
 
 // routes
@@ -18,7 +18,8 @@ import CommentRoute from "./Routers/CommentRoute.js"
 const app = express();
 
 //middle-ware that initialises Passport
-app.use(passport.initialize());
+app.use(passport.initialize())
+
 app.use(bodyParser.json({limit: '50mb', extended: true }))
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true }))
 
