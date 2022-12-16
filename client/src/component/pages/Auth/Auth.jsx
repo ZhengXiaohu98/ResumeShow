@@ -51,11 +51,11 @@ const Auth = () => {
   const [badInfo, setBadInfo] = useState(0);
 
   const checkForm = () => {
-    if (data.username.length == 0) {
+    if (data.username.length === 0) {
       setBadInfo(1)
       return false;
     }
-    else if ((data.password.length == 0)) {
+    else if ((data.password.length === 0)) {
       setBadInfo(2)
       return false;
     }
@@ -82,7 +82,7 @@ const Auth = () => {
           // bad username or passward
           setBadInfo(3)
         } else {
-          if (res.request.status == "200") {
+          if (res.request.status === "200") {
             // save token
             localStorage.setItem("token", res.data.token)
             window.open(process.env.REACT_APP_URL, "_self");
@@ -107,13 +107,13 @@ const Auth = () => {
 
           <span className='authDesc'>Enter your data to get sign in to your account</span>
 
-          {badInfo == 1 &&
+          {badInfo === 1 &&
             <span className='authDesc failAuth'>Username cannot be empty!</span>
           }
-          {badInfo == 2 &&
+          {badInfo === 2 &&
             <span className='authDesc failAuth'>Password cannot be empty!</span>
           }
-          {badInfo == 3 &&
+          {badInfo === 3 &&
             <span className='authDesc failAuth'>Invalid Username or Wrong Password</span>
           }
 
@@ -153,7 +153,7 @@ const Auth = () => {
           <hr class="hr-mid-circle" />
 
 
-          <span className='signOptions'>Or Sign in with</span>
+          {/* <span className='signOptions'>Or Sign in with</span>
 
           <div className="buttonWrapper">
             <div className="logoWrapper">
@@ -170,7 +170,7 @@ const Auth = () => {
                 GitHub
               </button>
             </div>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>
