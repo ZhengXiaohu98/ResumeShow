@@ -187,19 +187,19 @@ const MyPost = () => {
 
   //============================ check post data validation ========================================
   const isPostdataOk = () => {
-    if (postData.title.length < 20) {
+    if (postData.title.length < 10) {
       api.open({
         message: `Warning.`,
-        description: 'Title cannot be empty and must have more then 15 characters!',
+        description: 'The title length should at least have 10 characters!',
         icon: <WarningFilled style={{ color: '#f5222d' }} />,
         placement: "top"
       });
       return false;
     }
-    if (postData.description.length < 20) {
+    if (postData.description.length < 10) {
       api.open({
         message: `Warning.`,
-        description: 'Description cannot be empty and must have more then 20 characters!',
+        description: 'Description length should at least have 10 characters! A good description will increase the chance that your resume be liked!',
         icon: <WarningFilled style={{ color: '#f5222d' }} />,
         placement: "top"
       });
@@ -207,11 +207,6 @@ const MyPost = () => {
     }
     return true;
   }
-
-
-
-
-
 
   return (
 
