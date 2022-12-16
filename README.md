@@ -7,6 +7,7 @@
   - [Home page](#home-page)
 - [Use this project](#use-this-project)
 - [The team](#team)
+- [Dev Log](#dev-log)
 ********************************
 
 ## About this project
@@ -65,3 +66,5 @@ npm run start
 Our team consist of two members. [Xueqi Chen](https://github.com/xqcxqc) worked on building the server and creating APIs for the front-end. [Xiaohu Zheng](https://github.com/ZhengXiaohu98)
 mainly worked on building the home page for the site.
 
+## Dev Log
+- 12/26/2022 The website is now hosted. Click [ResumeShow](https://resumeshow.netlify.app/) to see. We are experiencing issues with google && github authentication, and we are working to fix the issue. Changed some UI for Home page and Post page.
