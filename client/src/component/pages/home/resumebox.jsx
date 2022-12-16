@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, React } from "react";
 import { Link } from "react-router-dom";
-import { Select, List, Space, Card, Button, Modal, Input, Spin} from 'antd';
-import { LikeTwoTone, MessageTwoTone, StarTwoTone, SearchOutlined,ReloadOutlined } from '@ant-design/icons';
+import { Select, List, Space, Card, Button, Modal, Input, Spin } from 'antd';
+import { LikeTwoTone, MessageTwoTone, StarTwoTone, SearchOutlined, ReloadOutlined } from '@ant-design/icons';
 
 import "./resumebox.css";
 import UserProvider from "../../../Context/UserProvider";
@@ -33,9 +33,6 @@ const ResumeBox = () => {
   // comment text
   let [comment, setComment] = useState("")
   let [curCommentId, setCurCommentId] = useState("");
-
-
-
 
   //========================== function to sort Post List ========================================
 
@@ -103,7 +100,6 @@ const ResumeBox = () => {
 
   //===================================================================================
 
-
   const majorOptions = [];
   for (let major of majorList) {
     majorOptions.push({
@@ -121,20 +117,20 @@ const ResumeBox = () => {
     fetchAllResume();
   }
 
-    // function to get the filter major list, then fetch resume
-    const handleFilterChange = (value) => {
-      async function fetchFiltedResume() {
-        try {
-          const res = await getResumeAPI.getFiltedResume(filterTags);
-          setResumeList(res.data)
-        } catch (err) {
-          console.log(err)
-        }
-      };
-      setLoading(true)
-      fetchFiltedResume();
-      setLoading(false)
+  // function to get the filter major list, then fetch resume
+  const handleFilterChange = (value) => {
+    async function fetchFiltedResume() {
+      try {
+        const res = await getResumeAPI.getFiltedResume(filterTags);
+        setResumeList(res.data)
+      } catch (err) {
+        console.log(err)
+      }
     };
+    setLoading(true)
+    fetchFiltedResume();
+    setLoading(false)
+  };
 
   //===================================================================================
 
@@ -242,7 +238,7 @@ const ResumeBox = () => {
     return col;
   }
 
-
+  //=============================================================================================
   return (
     <div >
       {loading && <div className="spin" style={{ zIndex: "1" }}><Spin tip="Loading..."> </Spin></div>}
@@ -292,8 +288,6 @@ const ResumeBox = () => {
           <Button className="filterBtn" onClick={handleFilterChange} icon={<SearchOutlined />}>Search</Button>
           <Button className="filterBtn" onClick={clearSelected} icon={<ReloadOutlined />}></Button>
         </Space.Compact>
-
-
 
         {/* div for showing the resumes */}
         <List
@@ -369,7 +363,7 @@ const ResumeBox = () => {
                   }}
                 >
                   <LikeTwoTone
-                    twoToneColor={item.likes.includes(user._id)? "#eb2f96" : "#88CA5E"}
+                    twoToneColor={item.likes.includes(user._id) ? "#eb2f96" : "#88CA5E"}
                     className="cardIcon"
                   />
                 </Button>
@@ -395,7 +389,7 @@ const ResumeBox = () => {
                   }}
                 >
                   <StarTwoTone
-                    twoToneColor={item.stars.includes(user._id)? "#FFD700" : "#B6B6B4"}
+                    twoToneColor={item.stars.includes(user._id) ? "#FFD700" : "#B6B6B4"}
                     className="cardIcon"
                   />
                 </Button>

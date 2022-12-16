@@ -1,35 +1,27 @@
 import passport from "passport";
 import userModel from "../Models/userModel.js";
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 
-//Google login
+
+/***************************************
+*             Google Login             *
+***************************************/
 export const googleCallback = () => {
   try {
     return (passport.authenticate("google", {
       successRedirect: process.env.CLIENT_URL,
       failureRedirect: "/login/failed",
     }));
-  } catch (error) {
+  } catch (err) {
     console.log("Error in AuthController/googleCallback")
-    console.log(error)
   }
 }
 
-//Facebook login
-export const facebookCallback = () => {
-  try {
-    return (passport.authenticate("facebook", {
-      successRedirect: process.env.CLIENT_URL,
-      failureRedirect: "/login/failed",
-    }));
-  } catch (error) {
-    console.log("Error in AuthController/facebookCallback")
-    console.log(error)
-  }
-}
-
-//Github login
+/***************************************
+*             Github Login             *
+***************************************/
 export const githubCallback = () => {
   try {
     return (passport.authenticate("github", {
@@ -43,93 +35,87 @@ export const githubCallback = () => {
 }
 
 
+//================== Sign Up on our site =========================
 
-
-
-//Regular sign up:
-//===========================================
-// break register into servel parts:
-
+/**************************************************
+* function to check if user is already registered *
+***************************************************/
 export const checkAlreadyRegistered = async (req, res, next) => {
 
-  const { Email } = req.body
-  const { username } = req.body
+  const { Email, username } = req.body
 
-  //check if user exist
+  // logic to find user by username and eamil
+  // if found any, return 400
   try {
-    const olderUser = await userModel.findOne({ Email })
-    const olderUser2 = await userModel.findOne({ username })
-    if (olderUser || olderUser2) {
+    const userFoundByEmail = await userModel.findOne({ Email })
+    const userFoundByUsername = await userModel.findOne({ username })
+    if (userFoundByEmail || userFoundByUsername) {
       return res.status(400).json({ message: "Email or username was used." })
     }
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ message: error.message })
   }
+
   next();
 }
 
-
+/***************************************
+* function to register a regular user  *
+****************************************/
 export const registerUser = async (req, res, next) => {
   const { username, Email } = req.body
-  //encrypt the password
+  // encrypt the password
   const salt = await bcrypt.genSalt(10)
   const hashedPass = await bcrypt.hash(req.body.password, salt);
 
-  //save user:
+  // creat a new user
   try {
     await new userModel({
       username, password: hashedPass, Email
     }).save()
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ message: error.message })
+  } catch (err) {
+    res.status(500).json({ message: err.message })
   }
 
   next();
 };
 
-
-
-//===========================================
-
-
-//Regular Sign in:
+/******************
+* REGULAR LOGIN   *
+*** ****************/
 export const login = (req, res) => {
-  req.login(req.user, function (err) {
-    if (err) { res.status(400).json({ error: err }); }
-    return res.status(200).json(req.user);
-  });
+
+  const { username, password } = req.body;
+
+  userModel.findOne({ username })
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ username: "Username does not exist!" })
+      }
+
+      bcrypt.compare(password, user.password)
+        .then(isMatch => {
+          if (isMatch) {
+            const rule = { ...user }
+            jwt.sign(rule, "secret", { expiresIn: "3d" }, (err, token) => {
+              res.status(200).json({
+                success: true,
+                token: "Bearer " + token
+              })
+            })
+          } else {
+            return res.status(400).json({ password: "Wrong password" })
+          }
+        })
+    })
 }
 
-//login success, return user info
-export const loginSuccess = (req, res) => {
-  console.log(req.user)
-
-  if (req.user) {
-    res.status(200).json({
-      error: false,
-      message: "Login success",
-      user: req.user
-    })
-  }
-
-  else {
-    res.status(403).json({
-      error: true,
-      message: "Not Authorized"
-    })
-  }
-}
-
-
+/***************
+*  LOGIN FAIL  *
+*** ************/
 export const loginFailed = (req, res) => {
   res.status(401).json({
     error: true,
     message: "Log in failure"
   })
-}
-
-export const logout = (req, res) => {
-  req.logout();
-  res.redirect(process.env.CLIENT_URL)
 }

@@ -1,8 +1,6 @@
 import express from "express";
 import * as Post from "../Controllers/PostController.js"
 
-
-
 const router = express();
 
 // create new post
@@ -22,17 +20,15 @@ router.put("/deleteLike/:id/:userID", Post.deleteLike)
 // comment:
 router.get("/addcomment/:id", Post.addPostComment)
 
-//star:
+// star:
 router.get("/star/:id", Post.updatePostStar)
 router.get("/unstar/:id", Post.updatePostUnstar)
 router.get("/getMyStar/:id", Post.getMyStar)
 router.put("/deleteStar/:id/:userID", Post.deleteStar)
 
 
-//delete operation
+// delete operation
 router.delete("/deletePost/:id", Post.deletePost)
 
 
-
 export default router;
-

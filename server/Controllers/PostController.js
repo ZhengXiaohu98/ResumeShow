@@ -5,16 +5,13 @@ import UserModel from "../Models/userModel.js"
 
 // user create a post
 export const createPost = async (req, res) => {
-
   const newPost = PostModel(req.body);
-
   try {
     await newPost.save();
     res.status(200).json({ newPost })
   } catch (error) {
     res.status(500).json(error)
   }
-
 }
 
 // get single post by given id
@@ -83,7 +80,7 @@ export const updatePostLike = async (req, res) => {
 
 
     // return res.status(200)
-    res.status(200).json("like the post: "+ id);
+    res.status(200).json("like the post: " + id);
 
   } catch (err) {
     console.log(err)
@@ -108,7 +105,7 @@ export const updatePostDislike = async (req, res) => {
       { $pull: { myLikes: id } }
     )
     // return res.status(204);
-    res.status(200).json("dislike the post: "+ id);
+    res.status(200).json("dislike the post: " + id);
 
   } catch (err) {
     console.log(err)
@@ -150,14 +147,14 @@ export const deleteLike = async (req, res) => {
   try {
     await PostModel.updateOne(
       { _id: postId },
-      { $pull: { likes: userId } }    )
+      { $pull: { likes: userId } })
 
     //rm the post to user's like list:
     await UserModel.updateOne(
       { _id: userId },
       { $pull: { myLikes: postId } })
 
-    res.status(200).json("dislike the post: "+ postId);
+    res.status(200).json("dislike the post: " + postId);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -182,7 +179,7 @@ export const updatePostStar = async (req, res) => {
       { _id: userId },
       { $push: { myStars: id } }
     )
-    res.status(200).json("Star the post: "+ id);
+    res.status(200).json("Star the post: " + id);
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
@@ -203,7 +200,7 @@ export const updatePostUnstar = async (req, res) => {
       { _id: userId },
       { $pull: { myStars: id } }
     )
-    res.status(200).json("Un-Star the post: "+ id);
+    res.status(200).json("Un-Star the post: " + id);
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
@@ -245,14 +242,14 @@ export const deleteStar = async (req, res) => {
   try {
     await PostModel.updateOne(
       { _id: postId },
-      { $pull: { stars: userId } }    )
+      { $pull: { stars: userId } })
 
     //rm the post to user's like list:
     await UserModel.updateOne(
       { _id: userId },
       { $pull: { myStars: postId } })
 
-    res.status(200).json("Un-Star the post: "+ postId);
+    res.status(200).json("Un-Star the post: " + postId);
   } catch (err) {
     res.status(500).json(err);
   }

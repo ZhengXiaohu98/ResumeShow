@@ -2,19 +2,19 @@ import { useState } from 'react'
 
 import "./Auth.css"
 import * as AuthAPI from "../../../API/AuthRequest.js"
-import axios from "axios"
 
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import background from "./background.jpg";
 import google from "./google.svg";
-import facebook from "./facebook.svg";
 import github from './github-mark.svg'
-
 
 
 const Auth = () => {
 
+  /*************************************
+  *        GOOGLE AUTHENTICATION       *
+  *************************************/
   const googleAuth = () => {
     try {
       window.open(
@@ -26,16 +26,9 @@ const Auth = () => {
     }
   };
 
-  const facebookAuth = () => {
-    try {
-      window.open(
-        `${process.env.REACT_APP_API_URL}/auth/facebook/callback`,
-        "_self"
-      );
-    } catch (error) {
-      console.log("Auth page, open oauth...  \n" + error)
-    }
-  };
+  /*************************************
+  *        GITHUB AUTHENTICATION       *
+  **************************************/
   const githubAuth = () => {
     try {
       window.open(
@@ -75,32 +68,33 @@ const Auth = () => {
     )
   }
 
-
+  /******************************
+  *        REGULAR SIGNIN       *
+  *******************************/
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (checkForm()) {
-      const response = await AuthAPI.logIn(data)
-
+      const res = await AuthAPI.logIn(data)
+      console.log(res)
       try {
-        //if result is undefined, invalid password or username
-        var loginResult = response.request
-        if (typeof loginResult === 'undefined') {
+        if (typeof res.request === 'undefined') {
           // bad username or passward
           setBadInfo(3)
-        } else { //check if status is 200, if so, go to home page
-          loginResult = response.request.status
-          if (loginResult == "200") {
-            // this.setState({ user: response.data })
+        } else {
+          if (res.request.status == "200") {
+            // save token
+            localStorage.setItem("token", res.data.token)
             window.open(process.env.REACT_APP_URL, "_self");
           }
         }
       } catch (err) {
-        console.log(err)
+        console.log(res)
       }
     }
   }
 
+  //==========================================================================================
   return (
     <div className="auth">
 
@@ -176,21 +170,11 @@ const Auth = () => {
                 GitHub
               </button>
             </div>
-
           </div>
-
-
         </form>
-
-        {/* </div> */}
-
-        {/* <Footer/> */}
-
       </div>
     </div>
   )
 }
 
 export default Auth
-
-//<a target="_blank" href="https://icons8.com/icon/60984/google">Google</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
