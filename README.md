@@ -67,4 +67,4 @@ Our team consist of two members. [Xueqi Chen](https://github.com/xqcxqc) worked 
 mainly worked on building the home page for the site.
 
 ## Dev Log
-- 12/16/2022 The website is now hosted. Click <a href="https://resumeshow.netlify.app/" target="_blank">ResumeShow</a> to see. We are experiencing issues with google && github authentication, and we are working to fix the issue. Changed some UI for Home page and Post page.
+- 12/16/2022 The website is now hosted. Click [ResumeShow](https://resumeshow.netlify.app/) to see. We are experiencing issues with google && github authentication, and we are working to fix the issue. Changed some UI for Home page and Post page.
