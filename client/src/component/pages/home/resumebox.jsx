@@ -316,7 +316,7 @@ const ResumeBox = () => {
                         :
                         item.title
                     }&nbsp;
-                    <EyeTwoTone twoToneColor="#52c41a"/>
+                    <EyeTwoTone twoToneColor="#52c41a" />
                   </Link>
                 }
                 description={
@@ -360,10 +360,10 @@ const ResumeBox = () => {
                   onClick={() => {
                     updateLikes(item._id, user._id, item, item.likes);
                   }}
+                  className="cardIconContainer"
                 >
                   <LikeTwoTone
                     twoToneColor={item.likes.includes(user._id) ? "#eb2f96" : "#88CA5E"}
-                    className="cardIcon"
                   />
                 </Button>
                 {item.likes.length}
@@ -374,10 +374,9 @@ const ResumeBox = () => {
                     setOpen(true);
                     setCurCommentId(item._id);
                   }}
+                  className="cardIconContainer"
                 >
-                  <MessageTwoTone
-                    className="cardIcon"
-                  />
+                  <MessageTwoTone/>
                 </Button>
                 {item.comments.length}
 
@@ -386,10 +385,10 @@ const ResumeBox = () => {
                   onClick={() => {
                     updateStars(item._id, user._id, item, item.stars);
                   }}
+                  className="cardIconContainer"
                 >
                   <StarTwoTone
-                    twoToneColor={item.stars.includes(user._id) ? "#FFD700" : "#B6B6B4"}
-                    className="cardIcon"
+                    twoToneColor={item.stars.includes(user._id) ? "#FFD700" : "#6699cc"}
                   />
                 </Button>
                 {item.stars.length}
