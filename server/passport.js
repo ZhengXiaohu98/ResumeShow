@@ -1,16 +1,11 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as GithubStrategy } from "passport-github";
-import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-
 
 import passport from "passport";
 import userModel from './Models/userModel.js'
 import dotenv from 'dotenv';
 dotenv.config();
 
-/***************************************
-*       Using Google Strategy          *
-***************************************/
 passport.use(
   new GoogleStrategy(
     {
@@ -61,18 +56,17 @@ passport.use(
 )
 
 
-/***************************************
-*       Using Github Strategy          *
-***************************************/
+
+
 passport.use(
   new GithubStrategy(
     {
-      clientID: process.env.CLIENT_ID_GitHub,
-      clientSecret: process.env.CLIENT_SECRET_GitHub,
+      clientID: process.env.CLIENT_ID_GITHUB,
+      clientSecret: process.env.CLIENT_SECRET_GITHUB,
       callbackURL: "/auth/github/callback",
       scope: ["read:user", "user:email"],
     },
-    function(accessToken, refreshToken, profile, done) {
+    function (accessToken, refreshToken, profile, done) {
 
       userModel.findOne({
         providerUserId: profile.id
@@ -82,13 +76,13 @@ passport.use(
         }
         if (!user) {
           let email = profile.email
-          if(profile.email == null){
+          if (profile.email == null) {
             email = "null@github.com"
           }
           user = new userModel({
             username: profile.username,
             Email: email,
-            password: "unknown",  
+            password: "unknown",
             name: profile.name,
             provider: 'github',
             providerUserId: profile.id,
@@ -98,7 +92,6 @@ passport.use(
             if (err) console.log(err);
             return done(err, user);
           });
-
         }
         //found user. Return
         else {
@@ -110,22 +103,26 @@ passport.use(
   )
 )
 
-/***************************************
-*       Using JWToken                  *
-***************************************/
 
-const opts = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: "secret"
-}
 
-passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-  User.findById(jwt_payload._id)
-    .then(user => {
-      if(user) {
-        return done(null, user)
-      }
-      return done(null, false)
-    })  
-    .catch(err => console.log(err))
-}))
+
+//due to using cookie session, need to serialize user
+passport.serializeUser((user, done) => {
+  return done(null, user)
+})
+
+passport.deserializeUser((user, done) => {
+  return done(null, user)
+})
+
+
+
+
+//This will find the correct user from the database and pass it as a closure variable into the callback done(err,user);
+//so the above code in the passport.session() can replace the 'user' value in the req object and pass on to the next middleware in the pile.
+// passport.deserializeUser(function (user, done) {
+//     //If using Mongoose with MongoDB; if other you will need JS specific to that schema.
+//     userModel.findById(user.id, function (err, user) {
+//         done(err, user);
+//     });
+// });

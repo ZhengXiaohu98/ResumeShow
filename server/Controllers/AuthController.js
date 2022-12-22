@@ -1,7 +1,6 @@
 import passport from "passport";
 import userModel from "../Models/userModel.js";
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 
 
 /***************************************
@@ -83,28 +82,14 @@ export const registerUser = async (req, res, next) => {
 *** ****************/
 export const login = (req, res) => {
 
-  const { username, password } = req.body;
-
-  userModel.findOne({ username })
-    .then(user => {
-      if (!user) {
-        return res.status(404).json({ username: "Username does not exist!" })
-      }
-
-      bcrypt.compare(password, user.password)
-        .then(isMatch => {
-          if (isMatch) {
-            jwt.sign({...user }, "secret", { expiresIn: "3d" }, (err, token) => {
-              res.status(200).json({
-                success: true,
-                token: "Bearer " + token
-              })
-            })
-          } else {
-            return res.status(400).json({ password: "Wrong password" })
-          }
-        })
-    })
+  req.login(req.user, function (err) {
+    if (err) {
+      res.status(400).json({ error: err });
+    }
+  });
+  req.session.user = req.user;
+  req.session.save();
+  res.status(200).json(req.user);
 }
 
 /***************
@@ -115,4 +100,36 @@ export const loginFailed = (req, res) => {
     error: true,
     message: "Log in failure"
   })
+}
+
+
+/***************
+*  LOGIN SUCCESS  *
+*** ************/
+export const loginSuccess = (req, res) => {
+
+  if (req.user) {
+    res.status(200).json({
+      error: false,
+      message: "Login success",
+      user: req.user
+    })
+  }
+  else {
+    res.status(403).json({
+      error: true,
+      message: "Not Authorized"
+    })
+  }
+}
+
+/***************
+*  LOG OUT  *
+*** ************/
+export const logout = (req, res) => {
+  req.logout(function (err) {
+    if (err) { return next(err); }
+  });
+  req.session.destroy();
+  res.redirect(process.env.CLIENT_URL)
 }

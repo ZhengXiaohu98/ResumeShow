@@ -1,25 +1,32 @@
 import React, { createContext, useState, useEffect } from "react";
-import jwt_decode from 'jwt-decode'
+import axios from "axios";
 
 const context = createContext(null);
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
-  useEffect(() => {
+  const getUser = async () => {
     try {
-      // decode token then save the user
-      const decodedUser = jwt_decode(localStorage.token)._doc
-      setUser(decodedUser);
+      const url = `${process.env.REACT_APP_API_URL}/auth/login/success`;
+
+      const { data } = await axios.get(url, { withCredentials: true });
+      console.log(data)
+      setUser(data.user);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  useEffect(() => {
+    getUser();
+
   }, []);
 
   return (
-      <context.Provider value={user}>
-          {children}
-      </context.Provider>
+    <context.Provider value={user}>
+      {children}
+    </context.Provider>
   );
 };
 
