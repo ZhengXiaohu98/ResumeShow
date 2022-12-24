@@ -1,5 +1,5 @@
-## Resume Show - Menu
-- [About this project](#about-this-project)
+## Resume Show
+- [Motivation](#motivation)
 - [Tools](#tools)
 - [Site Looks](#site-looks)
   - [Login page](#login-page)
@@ -10,7 +10,9 @@
 - [Dev Log](#dev-log)
 ********************************
 
-## About this project
+## Motivation
+Now Hosted: Click [ResumeShow](https://resumeshow.netlify.app) to visit the website.
+
 <p>
 Our team wants to build a website which can store different resumes from different disciplines. For those who already have an outstanding resume, they can upload it to the website to help others.
 And those who are building their resumes can use the website to learn how to build a good resume.
@@ -21,9 +23,9 @@ resume will have a section for users to comment and upvote.
 </p>
 
 ## Tools
-- Front-end: React + Ant Design
-- Back-end: Node.js
-- Database: MongoDB 
+- Front-end: [React](https://create-react-app.dev/) + [Ant Design](https://ant.design/)
+- Back-end: [Node.js](https://nodejs.org/en/)
+- Database: [MongoDB](https://www.mongodb.com/) 
 
 ## Site looks
 
@@ -68,3 +70,5 @@ mainly worked on building the home page for the site.
 
 ## Dev Log
 - 12/16/2022 The website is now hosted. Click [ResumeShow](https://resumeshow.netlify.app/) to see. We are experiencing issues with google && github authentication, and we are working to fix the issue. Changed some UI for Home page and Post page.
+
+- 12/23/2022 Fixed Google login authentication issue. Changed the server code to use session.
